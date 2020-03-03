@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SafewalkApplication.Contracts;
 using SafewalkApplication.Models;
 
 namespace SafewalkApplication.Controllers
@@ -13,111 +14,45 @@ namespace SafewalkApplication.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly SafewalkDatabaseContext _context;
+        private readonly IUserRepository _userRepository;
 
-        public UsersController(SafewalkDatabaseContext context)
+        public UsersController(IUserRepository userRepository)
         {
-            _context = context;
+            _userRepository = userRepository;
         }
 
-        // GET: api/Users
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        // GET: api/Users/{email}
+        [HttpGet("{email}")]
+        public async Task<ActionResult<User>> GetUser([FromHeader] string token, [FromRoute] string email)
         {
-            return await _context.User.ToListAsync();
+            return Ok();
         }
 
-        // GET: api/Users/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(string id)
+        // PUT: api/Users/{email}
+        [HttpPut("{email}")]
+        public async Task<IActionResult> PutUser([FromHeader] string token, [FromRoute] string email, [FromBody] User user)
         {
-            var user = await _context.User.FindAsync(id);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return user;
-        }
-
-        // PUT: api/Users/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(string id, User user)
-        {
-            if (id != user.UserId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(user).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return Ok();
         }
 
         // POST: api/Users
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<User>> PostUser([FromBody] User user)
         {
-            _context.User.Add(user);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (UserExists(user.UserId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
+            return Ok();
         }
 
-        // DELETE: api/Users/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(string id)
+        // DELETE: api/Users/{email}
+        [HttpDelete("{email}")]
+        public async Task<ActionResult<User>> DeleteUser([FromHeader] string token, [FromRoute] string email)
         {
-            var user = await _context.User.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            _context.User.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return user;
+            return Ok();
         }
 
-        private bool UserExists(string id)
+        // checks if user exists
+        private bool UserExists(string email)
         {
-            return _context.User.Any(e => e.UserId == id);
+            return true;
         }
     }
 }
