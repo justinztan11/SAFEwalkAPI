@@ -15,5 +15,6 @@ namespace SafewalkApplication.Models
         public string Photo { get; set; }
         public string HomeAddress { get; set; }
         public string Interest { get; set; }
+        public string Token { get; set; }
     }
 }
