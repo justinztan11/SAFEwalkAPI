@@ -140,4 +140,11 @@ C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\bin\Debug\ne
 C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\obj\Debug\netcoreapp3.1\SafewalkApplication.MvcApplicationPartsAssemblyInfo.cache

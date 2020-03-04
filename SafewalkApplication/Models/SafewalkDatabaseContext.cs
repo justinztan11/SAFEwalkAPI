@@ -54,10 +54,6 @@ namespace SafewalkApplication.Models
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Username)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.Token)
                     .HasMaxLength(255)
                     .IsUnicode(false);
@@ -96,10 +92,6 @@ namespace SafewalkApplication.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Photo)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Username)
                     .HasMaxLength(255)
                     .IsUnicode(false);
 

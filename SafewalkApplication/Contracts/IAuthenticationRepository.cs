@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace SafewalkApplication.Contracts
 {
-    public interface ILoginRepository
+    public interface IAuthenticationRepository
     {
-        Task<User> Get(string email, string password, bool isUser);
-
+        Task<User> Get(string token);
     }
 }

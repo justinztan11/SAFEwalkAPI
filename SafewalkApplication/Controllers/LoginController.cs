@@ -8,7 +8,8 @@ using SafewalkApplication.Contracts;
 
 namespace SafewalkApplication.Controllers
 {
-    [Route("api/[controller]")]
+    [Produces("application/json")]
+    [Route("api/Login")]
     [ApiController]
     public class LoginController : ControllerBase
     {
@@ -19,16 +20,26 @@ namespace SafewalkApplication.Controllers
         }
 
         // GET: api/Login
-        [HttpGet("{email}")]
-        public async Task<ActionResult<string>> GetUser([FromHeader] string email, [FromHeader] string password)
+        [HttpGet]
+        public async Task<ActionResult<string>> GetToken([FromHeader] string? email, [FromHeader] string? password, [FromHeader] bool isUser)
         {
-            return Ok();
-        }
+            if (email == null || password == null)
+            {
+                return BadRequest();
+            } 
 
-        // checks if user exists
-        private bool UserExists(string email)
-        {
-            return true;
+            var user = await _loginRepository.Get(email, password, isUser);
+            if (user != null)
+            {
+                var token = user.Token;
+                ////Save token in session object
+                //HttpContext.Session.SetString("JWToken", token);
+                return Ok(token);
+            } else
+            {
+                return NotFound();
+            }
+   
         }
 
     }

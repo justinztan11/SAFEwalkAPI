@@ -25,7 +25,7 @@ namespace SafewalkApplication.Controllers
         [HttpGet("{email}")]
         public async Task<ActionResult<User>> GetUser([FromHeader] string token, [FromRoute] string email)
         {
-            return Ok();
+            
         }
 
         // PUT: api/Users/{email}
