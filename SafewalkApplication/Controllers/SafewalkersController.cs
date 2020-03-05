@@ -40,5 +40,11 @@ namespace SafewalkApplication.Controllers
         {
             return true;
         }
+
+        // checks if Safewalker is authenticated/signed-in
+        private async Task<bool> UserAuthenticated(string token, string email)
+        {
+            return await _safewalkerRepository.Authenticated(token, email);
+        }
     }
 }
