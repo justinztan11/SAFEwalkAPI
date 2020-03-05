@@ -10,7 +10,7 @@ namespace SafewalkApplication.Contracts
     {
         Task<Walk> Get(string email);
 
-        Task<Walk> GetAll();
+        IEnumerable<Walk> GetAll();
 
         Task<Walk> Add(Walk walk);
 

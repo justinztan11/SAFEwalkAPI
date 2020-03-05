@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SafewalkApplication.Contracts;
 
+#nullable enable
 namespace SafewalkApplication.Controllers
 {
     [Produces("application/json")]
@@ -28,7 +29,7 @@ namespace SafewalkApplication.Controllers
                 return BadRequest();
             }
 
-            IPerson person = null;
+            IPerson? person = null;
             if ((bool)isUser)
             {
                 person = await _loginRepository.GetUser(email, password);

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SafewalkApplication.Contracts;
 using SafewalkApplication.Models;
 
+#nullable enable
 namespace SafewalkApplication.Controllers
 {
     [Route("api/[controller]")]
@@ -15,18 +16,41 @@ namespace SafewalkApplication.Controllers
     public class WalksController : ControllerBase
     {
         private readonly IWalkRepository _walkRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly ISafewalkerRepository _safewalkerRepository;
 
-        public WalksController(IWalkRepository walkRepository)
+        public WalksController(IWalkRepository walkRepository, IUserRepository userRepository, ISafewalkerRepository safewalkerRepository)
         {
             _walkRepository = walkRepository;
+            _safewalkerRepository = safewalkerRepository;
+            _userRepository = userRepository;
         }
 
         // GET: api/Walks
         // Authorization: Safewalker
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Walk>>> GetWalks([FromHeader] string token)
+        public async Task<ActionResult<IEnumerable<Walk>>> GetWalks([FromHeader] string? token)
         {
-            return Ok();
+            if (token == null) // if no token
+            {
+                return BadRequest();
+            }
+
+            // if not signed in nor authenticated
+            if (!(await _safewalkerRepository.Authenticated(token)))
+            {
+                return Unauthorized();
+            }
+
+            IEnumerable<Walk> walkList = _walkRepository.GetAll();
+
+            // if there are no walks 
+            if (!walkList.Any<Walk>())
+            {
+                return NotFound();
+            }
+            
+            return Ok(new ObjectResult(walkList));
         }
 
         // GET: api/Walks/{id}

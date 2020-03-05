@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SafewalkApplication.Contracts;
 using SafewalkApplication.Models;
 
+#nullable enable
 namespace SafewalkApplication.Controllers
 {
     [Route("api/[controller]")]
@@ -25,7 +26,7 @@ namespace SafewalkApplication.Controllers
 
         // GET: api/Users/{email}
         // Authorization: User, Safewalker
-        [HttpGet("{email}")]
+        [HttpGet("{email}", Name = "GetUser")]
         public async Task<ActionResult<User>> GetUser([FromHeader] string? token, [FromRoute] string? email, [FromHeader] bool? isUser)
         {
             if (token == null || email == null || isUser == null)
@@ -35,21 +36,22 @@ namespace SafewalkApplication.Controllers
 
             if ((bool)isUser) // if User
             {
-                // if not signed in and authenticated
-                if (!(await _userRepository.Authenticated(token, email)))
+                // if not signed in nor authenticated
+                if (!(await _userRepository.Authenticated(token)))
                 {
-                    // return error authentication message
+                    // TODO: return error response
                 }
             }
             else // if Safewalker
             {
-                // if not signed in and authenticated
-                if (!(await _safewalkerRepository.Authenticated(token, email)))
+                // if not signed in nor authenticated
+                if (!(await _safewalkerRepository.Authenticated(token)))
                 {
-                    // return error authentication message
+                    // TODO: return error response
                 }
             }
 
+            // TODO: handle null user error
             var user = await _userRepository.Get(email);
 
             return Ok(user);
@@ -68,7 +70,11 @@ namespace SafewalkApplication.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser([FromBody] User user)
         {
-            return Ok();
+            Guid guid = Guid.NewGuid();
+            user.Id = guid.ToString();
+            // TODO: handle errors
+            await _userRepository.Add(user);
+            return Ok(user);
         }
 
         // DELETE: api/Users/{email}

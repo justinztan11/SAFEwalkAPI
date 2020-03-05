@@ -14,6 +14,6 @@ namespace SafewalkApplication.Contracts
         
         Task<bool> Exists(string email);
 
-        Task<bool> Authenticated(string token, string email);
+        Task<bool> Authenticated(string token);
     }
 }

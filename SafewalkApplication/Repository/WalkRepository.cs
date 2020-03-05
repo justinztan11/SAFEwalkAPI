@@ -31,9 +31,9 @@ namespace SafewalkApplication.Repository
             throw new NotImplementedException();
         }
 
-        public Task<Walk> GetAll()
+        public IEnumerable<Walk> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Walk;
         }
 
         public Task<Walk> Update(string email, Walk walk)

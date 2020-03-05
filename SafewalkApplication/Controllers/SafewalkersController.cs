@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SafewalkApplication.Contracts;
 using SafewalkApplication.Models;
 
+#nullable enable
 namespace SafewalkApplication.Controllers
 {
     [Route("api/[controller]")]
@@ -36,7 +37,7 @@ namespace SafewalkApplication.Controllers
             if ((bool)isUser) // if User
             {
                 // if not signed in and authenticated
-                if (!(await _userRepository.Authenticated(token, email)))
+                if (!(await _userRepository.Authenticated(token)))
                 {
                     // return error authentication message
                 }
@@ -44,7 +45,7 @@ namespace SafewalkApplication.Controllers
             else // if Safewalker
             {
                 // if not signed in and authenticated
-                if (!(await _safewalkerRepository.Authenticated(token, email)))
+                if (!(await _safewalkerRepository.Authenticated(token)))
                 {
                     // return error authentication message
                 }
