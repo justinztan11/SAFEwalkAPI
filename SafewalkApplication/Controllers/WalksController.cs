@@ -22,27 +22,31 @@ namespace SafewalkApplication.Controllers
         }
 
         // GET: api/Walks
+        // Authorization: Safewalker
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Walk>>> GetWalks([FromHeader] string token)
         {
             return Ok();
         }
 
-        // GET: api/Walks/{email}
+        // GET: api/Walks/{id}
+        // Authorization: User, Safewalker
         [HttpGet("{email}")]
-        public async Task<ActionResult<Walk>> GetWalk([FromHeader] string token, [FromRoute] string email)
+        public async Task<ActionResult<Walk>> GetWalk([FromHeader] string token, [FromRoute] string id, [FromHeader] bool isUser)
         {
             return Ok();
         }
 
-        // PUT: api/Walks/{email}
+        // PUT: api/Walks/{id}
+        // Authorization: User - can modify status, Safewalker - can modify email and status
         [HttpPut("{email}")]
-        public async Task<IActionResult> PutWalk([FromHeader] string token, [FromRoute] string email, [FromBody] Walk walk)
+        public async Task<IActionResult> PutWalk([FromHeader] string token, [FromRoute] string id, [FromHeader] bool isUser, [FromBody] Walk walk)
         {
             return Ok();
         }
 
-        // POST: api/Walks
+        // POST: api/Walk
+        // Authorization: User
         [HttpPost]
         public async Task<ActionResult<Walk>> PostWalk([FromHeader] string token, [FromBody] Walk walk)
         {
@@ -50,7 +54,7 @@ namespace SafewalkApplication.Controllers
         }
 
         // checks if walk is pending or ongoing
-        private bool WalkExists(string email)
+        private bool WalkExists(string id)
         {
             return true;
         }

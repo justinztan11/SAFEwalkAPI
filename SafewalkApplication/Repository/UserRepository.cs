@@ -22,9 +22,9 @@ namespace SafewalkApplication.Repository
             throw new NotImplementedException();
         }
 
-        public Task<User> Get(string email)
+        public async Task<User> Get(string email)
         {
-            throw new NotImplementedException();
+            return await _context.User.SingleAsync(m => m.Email == email);
         }
 
         public Task<User> Update(string email, User user)

@@ -15,20 +15,46 @@ namespace SafewalkApplication.Controllers
     public class SafewalkersController : ControllerBase
     {
         private readonly ISafewalkerRepository _safewalkerRepository;
+        private readonly IUserRepository _userRepository;
 
-        public SafewalkersController(ISafewalkerRepository safewalkerRepository)
+        public SafewalkersController(ISafewalkerRepository safewalkerRepository, IUserRepository userRepository)
         {
             _safewalkerRepository = safewalkerRepository;
+            _userRepository = userRepository;
         }
 
         // GET: api/Safewalkers/{email}
+        // Authorization: User, Safewalker
         [HttpGet("{email}")]
-        public async Task<ActionResult<Safewalker>> GetSafewalker([FromHeader] string token, [FromRoute] string email)
+        public async Task<ActionResult<Safewalker>> GetSafewalker([FromHeader] string? token, [FromRoute] string? email, [FromHeader] bool? isUser)
         {
+            if (token == null || email == null || isUser == null)
+            {
+                return BadRequest();
+            }
+
+            if ((bool)isUser) // if User
+            {
+                // if not signed in and authenticated
+                if (!(await _userRepository.Authenticated(token, email)))
+                {
+                    // return error authentication message
+                }
+            }
+            else // if Safewalker
+            {
+                // if not signed in and authenticated
+                if (!(await _safewalkerRepository.Authenticated(token, email)))
+                {
+                    // return error authentication message
+                }
+            }
+
             return Ok();
         }
 
         // PUT: api/Safewalkers/{email}
+        // Authorization: Safewalker
         [HttpPut("{email}")]
         public async Task<IActionResult> PutSafewalker([FromHeader] string token, [FromRoute] string email, [FromBody] Safewalker safewalker)
         {
@@ -39,12 +65,6 @@ namespace SafewalkApplication.Controllers
         private bool SafewalkerExists(string email)
         {
             return true;
-        }
-
-        // checks if Safewalker is authenticated/signed-in
-        private async Task<bool> UserAuthenticated(string token, string email)
-        {
-            return await _safewalkerRepository.Authenticated(token, email);
         }
     }
 }
