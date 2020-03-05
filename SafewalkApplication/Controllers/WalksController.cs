@@ -43,7 +43,6 @@ namespace SafewalkApplication.Controllers
         }
 
         // POST: api/Walks
-  
         [HttpPost]
         public async Task<ActionResult<Walk>> PostWalk([FromHeader] string token, [FromBody] Walk walk)
         {

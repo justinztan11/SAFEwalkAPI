@@ -8,13 +8,13 @@ namespace SafewalkApplication.Contracts
 {
     public interface IWalkRepository
     {
-        Task<Walk> Get(string token, string email);
+        Task<Walk> Get(string email);
 
-        Task<Walk> GetAll(string token);
+        Task<Walk> GetAll();
 
-        Task<Walk> Add(string token, Walk walk);
+        Task<Walk> Add(Walk walk);
 
-        Task<Walk> Update(string token, string email, Walk walk);
+        Task<Walk> Update(string email, Walk walk);
 
         Task<bool> Exists(string email);
     }

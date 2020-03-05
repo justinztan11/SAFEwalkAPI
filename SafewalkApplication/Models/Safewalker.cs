@@ -1,11 +1,12 @@
-﻿using System;
+﻿using SafewalkApplication.Contracts;
+using System;
 using System.Collections.Generic;
 
 namespace SafewalkApplication.Models
 {
-    public partial class Safewalker
+    public partial class Safewalker : IPerson
     {
-        public string WalkerId { get; set; }
+        public string Id { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string Password { get; set; }

@@ -27,16 +27,9 @@ namespace SafewalkApplication.Repository
         }
 
 
-        public async Task<User> Get(string email, string password, bool isUser)
+        public async Task<User> GetUser(string email, string password)
         {
-            dynamic user = null;
-            if (isUser)
-            {
-                user = await _context.User.SingleAsync(m => m.Email == email && m.Password == password);
-            } else
-            {
-                user = await _context.Safewalker.SingleAsync(m => m.Email == email && m.Password == password);
-            }
+            var user = await _context.User.SingleAsync(m => m.Email == email && m.Password == password);
 
             if (user == null)
             {
@@ -49,7 +42,7 @@ namespace SafewalkApplication.Repository
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.UserId.ToString())
+                    new Claim(ClaimTypes.Name, user.Id.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -65,6 +58,38 @@ namespace SafewalkApplication.Repository
             // set up later
             //return user.WithoutPassword();
 
+        }
+
+        public async Task<Safewalker> GetWalker(string email, string password)
+        {
+            var walker = await _context.Safewalker.SingleAsync(m => m.Email == email && m.Password == password);
+
+            if (walker == null)
+            {
+                return null;
+            }
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, walker.Id.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddDays(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            walker.Token = tokenHandler.WriteToken(token);
+
+            _context.Safewalker.Update(walker);
+            await _context.SaveChangesAsync();
+
+            return walker;
+
+            // set up later
+            //return walker.WithoutPassword();
         }
     }
 }

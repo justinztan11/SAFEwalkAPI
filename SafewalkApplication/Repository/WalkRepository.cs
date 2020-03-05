@@ -16,7 +16,7 @@ namespace SafewalkApplication.Repository
             _context = context;
         }
 
-        public Task<Walk> Add(string token, Walk walk)
+        public Task<Walk> Add(Walk walk)
         {
             throw new NotImplementedException();
         }
@@ -26,17 +26,17 @@ namespace SafewalkApplication.Repository
             throw new NotImplementedException();
         }
 
-        public Task<Walk> Get(string token, string email)
+        public Task<Walk> Get(string email)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Walk> GetAll(string token)
+        public Task<Walk> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Walk> Update(string token, string email, Walk walk)
+        public Task<Walk> Update(string email, Walk walk)
         {
             throw new NotImplementedException();
         }

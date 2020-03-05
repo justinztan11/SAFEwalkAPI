@@ -1,10 +1,11 @@
-﻿using SafewalkApplication.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace SafewalkApplication.Models
+namespace SafewalkApplication.Contracts
 {
-    public partial class User : IPerson
+    public interface IPerson
     {
         public string Id { get; set; }
         public string LastName { get; set; }
@@ -13,8 +14,6 @@ namespace SafewalkApplication.Models
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string Photo { get; set; }
-        public string HomeAddress { get; set; }
-        public string Interest { get; set; }
         public string Token { get; set; }
     }
 }

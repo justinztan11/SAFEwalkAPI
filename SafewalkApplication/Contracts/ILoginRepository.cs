@@ -8,7 +8,9 @@ namespace SafewalkApplication.Contracts
 {
     public interface ILoginRepository
     {
-        Task<User> Get(string email, string password, bool isUser);
+        Task<User> GetUser(string email, string password);
+
+        Task<Safewalker> GetWalker(string email, string password);
 
     }
 }

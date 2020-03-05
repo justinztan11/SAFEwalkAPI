@@ -67,6 +67,7 @@ namespace SafewalkApplication
             services.AddScoped<ILoginRepository, LoginRepository>();
             services.AddScoped<ISafewalkerRepository, SafewalkerRepository>();
             services.AddScoped<IWalkRepository, WalkRepository>();
+            services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
 
             services.AddControllers();
 

@@ -8,10 +8,12 @@ namespace SafewalkApplication.Contracts
 {
     public interface ISafewalkerRepository
     {
-        Task<Safewalker> Get(string token, string email);
+        Task<Safewalker> Get(string email);
 
-        Task<User> Update(string token, string email, Safewalker safewalker);
+        Task<User> Update(string email, Safewalker safewalker);
         
         Task<bool> Exists(string email);
+
+        Task<bool> Authenticated(string token, string email);
     }
 }

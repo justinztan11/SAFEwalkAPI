@@ -1,4 +1,5 @@
-﻿using SafewalkApplication.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using SafewalkApplication.Contracts;
 using SafewalkApplication.Models;
 using System;
 using System.Collections.Generic;
@@ -21,19 +22,23 @@ namespace SafewalkApplication.Repository
             throw new NotImplementedException();
         }
 
+        public Task<User> Get(string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<User> Update(string email, User user)
+        {
+            throw new NotImplementedException();
+        }
         public Task<bool> Exists(string email)
         {
             throw new NotImplementedException();
         }
 
-        public Task<User> Get(string token, string email)
+        public Task<bool> Authenticated(string token, string email)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<User> Update(string token, string email, User user)
-        {
-            throw new NotImplementedException();
+            return _context.User.AnyAsync(m => m.Email == email && m.Token == token);
         }
     }
 }

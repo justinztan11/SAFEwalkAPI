@@ -23,10 +23,10 @@ namespace SafewalkApplication.Models
         {
             modelBuilder.Entity<Safewalker>(entity =>
             {
-                entity.HasKey(e => e.WalkerId)
+                entity.HasKey(e => e.Id)
                     .HasName("PK__Safewalk__3C01D56AF63E9AB8");
 
-                entity.Property(e => e.WalkerId)
+                entity.Property(e => e.Id)
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
@@ -61,7 +61,7 @@ namespace SafewalkApplication.Models
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.Property(e => e.UserId)
+                entity.Property(e => e.Id)
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
@@ -102,7 +102,7 @@ namespace SafewalkApplication.Models
 
             modelBuilder.Entity<Walk>(entity =>
             {
-                entity.Property(e => e.WalkId)
+                entity.Property(e => e.Id)
                     .HasMaxLength(255)
                     .IsUnicode(false);
 

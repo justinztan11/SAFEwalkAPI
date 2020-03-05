@@ -25,7 +25,14 @@ namespace SafewalkApplication.Controllers
         [HttpGet("{email}")]
         public async Task<ActionResult<User>> GetUser([FromHeader] string token, [FromRoute] string email)
         {
-            
+            // if user is signed in and authenticated
+            if (!(await UserAuthenticated(email, token))) 
+            {
+                // not authenticated, return error authentication message
+            }
+
+            return Ok();
+             
         }
 
         // PUT: api/Users/{email}
@@ -50,9 +57,15 @@ namespace SafewalkApplication.Controllers
         }
 
         // checks if user exists
-        private bool UserExists(string email)
+        private async Task<bool> UserExists(string email)
         {
             return true;
+        }
+
+        // checks if user is authenticated/signed-in
+        private async Task<bool> UserAuthenticated(string token, string email)
+        {
+            return await _userRepository.Authenticated(token, email);
         }
     }
 }

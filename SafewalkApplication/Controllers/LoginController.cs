@@ -21,17 +21,25 @@ namespace SafewalkApplication.Controllers
 
         // GET: api/Login
         [HttpGet]
-        public async Task<ActionResult<string>> GetToken([FromHeader] string? email, [FromHeader] string? password, [FromHeader] bool isUser)
+        public async Task<ActionResult<string>> GetLogin([FromHeader] string? email, [FromHeader] string? password, [FromHeader] bool isUser)
         {
             if (email == null || password == null)
             {
                 return BadRequest();
-            } 
+            }
 
-            var user = await _loginRepository.Get(email, password, isUser);
-            if (user != null)
+            IPerson person = null;
+            if (isUser)
             {
-                var token = user.Token;
+                person = await _loginRepository.GetUser(email, password);
+            } else
+            {
+                person = await _loginRepository.GetWalker(email, password);
+            }
+
+            if (person != null)
+            {
+                var token = person.Token;
                 ////Save token in session object
                 //HttpContext.Session.SetString("JWToken", token);
                 return Ok(token);

@@ -5,7 +5,7 @@ namespace SafewalkApplication.Models
 {
     public partial class Walk
     {
-        public string WalkId { get; set; }
+        public string Id { get; set; }
         public string UserId { get; set; }
         public string WalkerId { get; set; }
         public DateTime? Time { get; set; }
