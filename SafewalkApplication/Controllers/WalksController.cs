@@ -36,7 +36,7 @@ namespace SafewalkApplication.Controllers
                 return BadRequest();
             }
 
-            // if not signed in nor authenticated
+            // if not signed in and authenticated
             if (!(await _safewalkerRepository.Authenticated(token)))
             {
                 return Unauthorized();
@@ -44,8 +44,7 @@ namespace SafewalkApplication.Controllers
 
             IEnumerable<Walk> walkList = _walkRepository.GetAll();
 
-            // if there are no walks 
-            if (!walkList.Any<Walk>())
+            if (!walkList.Any<Walk>()) // if there are no walks 
             {
                 return NotFound();
             }
@@ -56,31 +55,91 @@ namespace SafewalkApplication.Controllers
         // GET: api/Walks/{id}
         // Authorization: User, Safewalker
         [HttpGet("{email}")]
-        public async Task<ActionResult<Walk>> GetWalk([FromHeader] string token, [FromRoute] string id, [FromHeader] bool isUser)
+        public async Task<ActionResult<Walk>> GetWalk([FromHeader] string? token, [FromRoute] string? id, [FromHeader] bool? isUser)
         {
-            return Ok();
+            if (token == null || id == null || isUser == null) // if empty field
+            {
+                return BadRequest();
+            }
+
+            if ((bool)isUser) // User
+            {
+                // if not signed in and authenticated
+                if (!(await _userRepository.Authenticated(token)))
+                {
+                    return Unauthorized();
+                }
+
+            } else // Safewalker
+            {
+                // if not signed in and authenticated
+                if (!(await _safewalkerRepository.Authenticated(token)))
+                {
+                    return Unauthorized();
+                }
+            }
+            
+            var walk = await _walkRepository.Get(id);
+
+            if (walk == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(walk);
         }
 
         // PUT: api/Walks/{id}
         // Authorization: User - can modify status, Safewalker - can modify email and status
         [HttpPut("{email}")]
-        public async Task<IActionResult> PutWalk([FromHeader] string token, [FromRoute] string id, [FromHeader] bool isUser, [FromBody] Walk walk)
+        public async Task<IActionResult> PutWalk([FromHeader] string? token, [FromRoute] string? id, [FromHeader] bool? isUser, [FromBody] Walk walk)
         {
+            if (token == null || id == null || isUser == null) // if empty field
+            {
+                return BadRequest();
+            }
+
+            if ((bool)isUser) // User
+            {
+                // if not signed in and authenticated
+                if (!(await _userRepository.Authenticated(token)))
+                {
+                    return Unauthorized();
+                }
+
+            }
+            else // Safewalker
+            {
+                // if not signed in and authenticated
+                if (!(await _safewalkerRepository.Authenticated(token)))
+                {
+                    return Unauthorized();
+                }
+            }
+
             return Ok();
         }
 
         // POST: api/Walk
         // Authorization: User
         [HttpPost]
-        public async Task<ActionResult<Walk>> PostWalk([FromHeader] string token, [FromBody] Walk walk)
+        public async Task<ActionResult<Walk>> PostWalk([FromHeader] string? token, [FromBody] Walk? walk)
         {
-            return Ok();
+            if (token == null || walk == null ) // if empty field
+            {
+                return BadRequest();
+            }
+
+            Guid guid = Guid.NewGuid();
+            walk.Id = guid.ToString();
+            await _walkRepository.Add(walk);
+            return Ok(walk);
         }
 
         // checks if walk is pending or ongoing
-        private bool WalkExists(string id)
+        private async Task<bool> WalkExists(string id)
         {
-            return true;
+            return await _walkRepository.Exists(id);
         }
     }
 }

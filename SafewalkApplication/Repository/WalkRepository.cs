@@ -1,4 +1,5 @@
-﻿using SafewalkApplication.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using SafewalkApplication.Contracts;
 using SafewalkApplication.Models;
 using System;
 using System.Collections.Generic;
@@ -16,19 +17,21 @@ namespace SafewalkApplication.Repository
             _context = context;
         }
 
-        public Task<Walk> Add(Walk walk)
+        public async Task<Walk> Add(Walk walk)
         {
-            throw new NotImplementedException();
+            await _context.Walk.AddAsync(walk);
+            await _context.SaveChangesAsync();
+            return walk;
         }
 
-        public Task<bool> Exists(string email)
+        public async Task<bool> Exists(string id)
         {
-            throw new NotImplementedException();
+            return await _context.Walk.AnyAsync(m => m.Id == id);
         }
 
-        public Task<Walk> Get(string email)
+        public async Task<Walk> Get(string id)
         {
-            throw new NotImplementedException();
+            return await _context.Walk.SingleAsync(m => m.Id == id);
         }
 
         public IEnumerable<Walk> GetAll()
@@ -36,7 +39,7 @@ namespace SafewalkApplication.Repository
             return _context.Walk;
         }
 
-        public Task<Walk> Update(string email, Walk walk)
+        public Task<Walk> Update(string id, Walk walk)
         {
             throw new NotImplementedException();
         }

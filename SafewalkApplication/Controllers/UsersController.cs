@@ -26,7 +26,7 @@ namespace SafewalkApplication.Controllers
 
         // GET: api/Users/{email}
         // Authorization: User, Safewalker
-        [HttpGet("{email}", Name = "GetUser")]
+        [HttpGet("{email}")]
         public async Task<ActionResult<User>> GetUser([FromHeader] string? token, [FromRoute] string? email, [FromHeader] bool? isUser)
         {
             if (token == null || email == null || isUser == null)
@@ -36,7 +36,7 @@ namespace SafewalkApplication.Controllers
 
             if ((bool)isUser) // if User
             {
-                // if not signed in nor authenticated
+                // if not signed in and authenticated
                 if (!(await _userRepository.Authenticated(token)))
                 {
                     // TODO: return error response
@@ -72,7 +72,6 @@ namespace SafewalkApplication.Controllers
         {
             Guid guid = Guid.NewGuid();
             user.Id = guid.ToString();
-            // TODO: handle errors
             await _userRepository.Add(user);
             return Ok(user);
         }

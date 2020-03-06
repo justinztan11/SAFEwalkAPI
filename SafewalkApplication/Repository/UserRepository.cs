@@ -17,9 +17,11 @@ namespace SafewalkApplication.Repository
             _context = context;
         }
 
-        public Task<User> Add(User user)
+        public async Task<User> Add(User user)
         {
-            throw new NotImplementedException();
+            await _context.User.AddAsync(user);
+            await _context.SaveChangesAsync();
+            return user;
         }
 
         public async Task<User> Get(string email)
