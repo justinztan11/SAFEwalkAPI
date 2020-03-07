@@ -26,16 +26,25 @@ namespace SafewalkApplication.Repository
 
         public async Task<User> Get(string email)
         {
-            return await _context.User.SingleAsync(m => m.Email == email);
+            return await _context.User.SingleOrDefaultAsync(m => m.Email == email);
         }
 
-        public Task<User> Update(string email, User user)
+        public async Task<User> Update(string email, User user)
         {
-            throw new NotImplementedException();
+            _context.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return user;
         }
-        public Task<bool> Exists(string email)
+        public async Task<User> Delete(string email)
         {
-            throw new NotImplementedException();
+            var user = await _context.User.SingleOrDefaultAsync(m => m.Email == email);
+            _context.User.Remove(user);
+            await _context.SaveChangesAsync();
+            return user;
+        }
+        public async Task<bool> Exists(string email)
+        {
+            return await _context.User.AnyAsync(m => m.Email == email);
         }
 
         public Task<bool> Authenticated(string token)

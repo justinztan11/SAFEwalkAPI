@@ -26,6 +26,7 @@ namespace SafewalkApplication.Controllers
 
         // GET: api/Users/{email}
         // Authorization: User, Safewalker
+        // Unauthorized Fields: Id, Password, Token
         [HttpGet("{email}")]
         public async Task<ActionResult<User>> GetUser([FromHeader] string? token, [FromRoute] string? email, [FromHeader] bool? isUser)
         {
@@ -39,7 +40,7 @@ namespace SafewalkApplication.Controllers
                 // if not signed in and authenticated
                 if (!(await _userRepository.Authenticated(token)))
                 {
-                    // TODO: return error response
+                    return Unauthorized();
                 }
             }
             else // if Safewalker
@@ -47,33 +48,53 @@ namespace SafewalkApplication.Controllers
                 // if not signed in nor authenticated
                 if (!(await _safewalkerRepository.Authenticated(token)))
                 {
-                    // TODO: return error response
+                    return Unauthorized();
                 }
             }
 
-            // TODO: handle null user error
+                // TODO: handle null user error
             var user = await _userRepository.Get(email);
-
-            return Ok(user);
-             
+            if (user == null)
+            {
+                return NotFound();
+            }
+                return Ok(user);
         }
 
         // PUT: api/Users/{email}
         // Authorization: User
+        // Unauthorized Fields: Id, Password, Token
         [HttpPut("{email}")]
         public async Task<IActionResult> PutUser([FromHeader] string token, [FromRoute] string email, [FromBody] User user)
         {
-            return Ok();
+            if (!(await _userRepository.Authenticated(token)))
+            {
+                return Unauthorized();
+            }
+
+            // TODO populate old model into new model
+
+
+
+            return Ok(await _userRepository.Update(email, user));
+
+
+
+
         }
 
         // POST: api/Users
         [HttpPost]
         public async Task<ActionResult<User>> PostUser([FromBody] User user)
         {
-            Guid guid = Guid.NewGuid();
-            user.Id = guid.ToString();
-            await _userRepository.Add(user);
-            return Ok(user);
+            if (!await _userRepository.Exists(user.Email)) 
+            {
+                Guid guid = Guid.NewGuid();
+                user.Id = guid.ToString();
+                await _userRepository.Add(user);
+                return Ok(user);
+            }
+            return Conflict(user);
         }
 
         // DELETE: api/Users/{email}
@@ -81,13 +102,22 @@ namespace SafewalkApplication.Controllers
         [HttpDelete("{email}")]
         public async Task<ActionResult<User>> DeleteUser([FromHeader] string token, [FromRoute] string email)
         {
-            return Ok();
-        }
+            if (!(await _userRepository.Authenticated(token)))
+            {
+                return Unauthorized();
+            }
 
-        // checks if user exists
-        private async Task<bool> UserExists(string email)
-        {
-            return true;
+            if (token == null || email == null)
+            {
+                return BadRequest();
+            }
+
+            if (await _userRepository.Exists(email))
+            {
+                return Ok(await _userRepository.Get(email));
+            }
+            
+            return NotFound();
         }
     }
 }
