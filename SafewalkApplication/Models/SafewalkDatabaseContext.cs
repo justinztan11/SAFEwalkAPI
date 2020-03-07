@@ -54,10 +54,6 @@ namespace SafewalkApplication.Models
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.CurrLat).HasColumnType("decimal(18, 0)");
-
-                entity.Property(e => e.CurrLng).HasColumnType("decimal(18, 0)");
-
                 entity.Property(e => e.Token)
                     .HasMaxLength(255)
                     .IsUnicode(false);
@@ -125,6 +121,10 @@ namespace SafewalkApplication.Models
                 entity.Property(e => e.StartText)
                     .HasMaxLength(255)
                     .IsUnicode(false);
+
+                entity.Property(e => e.WalkerCurrLat).HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.WalkerCurrLng).HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.Time).HasColumnType("datetime");
 

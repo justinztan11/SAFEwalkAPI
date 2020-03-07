@@ -15,6 +15,8 @@ namespace SafewalkApplication.Models
         public string DestText { get; set; }
         public decimal? DestLat { get; set; }
         public decimal? DestLng { get; set; }
+        public decimal? WalkerCurrLat { get; set; }
+        public decimal? WalkerCurrLng { get; set; }
         public int? Status { get; set; }
     }
 }

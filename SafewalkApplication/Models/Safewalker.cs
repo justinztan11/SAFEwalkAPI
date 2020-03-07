@@ -13,8 +13,6 @@ namespace SafewalkApplication.Models
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string Photo { get; set; }
-        public decimal? CurrLat { get; set; }
-        public decimal? CurrLng { get; set; }
         public string Token { get; set; }
     }
 }
