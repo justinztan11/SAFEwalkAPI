@@ -62,7 +62,7 @@ namespace SafewalkApplication.Repository
 
         public async Task<Safewalker> GetWalker(string email, string password)
         {
-            var walker = await _context.Safewalker.SingleAsync(m => m.Email == email && m.Password == password);
+            var walker = await _context.Safewalker.SingleOrDefaultAsync(m => m.Email == email && m.Password == password);
 
             if (walker == null)
             {

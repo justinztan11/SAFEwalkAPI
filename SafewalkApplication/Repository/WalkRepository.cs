@@ -31,13 +31,14 @@ namespace SafewalkApplication.Repository
 
         public async Task<Walk> Get(string id)
         {
-            return await _context.Walk.SingleAsync(m => m.Id == id);
+            return await _context.Walk.SingleOrDefaultAsync(m => m.Id == id);
         }
 
         public IEnumerable<Walk> GetAll()
         {
             return _context.Walk;
         }
+
 
         public Task<Walk> Update(string id, Walk walk)
         {
