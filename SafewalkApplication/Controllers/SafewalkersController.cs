@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SafewalkApplication.Contracts;
+using SafewalkApplication.Helpers;
 using SafewalkApplication.Models;
 
 #nullable enable
@@ -26,6 +27,7 @@ namespace SafewalkApplication.Controllers
 
         // GET: api/Safewalkers/{email}
         // Authorization: User, Safewalker
+        // Unauthorized Fields: Id, Password, Token
         [HttpGet("{email}")]
         public async Task<ActionResult<Safewalker>> GetSafewalker([FromHeader] string? token, [FromRoute] string? email, [FromHeader] bool? isUser)
         {
@@ -39,7 +41,7 @@ namespace SafewalkApplication.Controllers
                 // if not signed in and authenticated
                 if (!(await _userRepository.Authenticated(token)))
                 {
-                    // return error authentication message
+                    return Unauthorized();
                 }
             }
             else // if Safewalker
@@ -47,11 +49,16 @@ namespace SafewalkApplication.Controllers
                 // if not signed in and authenticated
                 if (!(await _safewalkerRepository.Authenticated(token)))
                 {
-                    // return error authentication message
+                    return Unauthorized();
                 }
             }
 
-            return Ok();
+            var safewalker = await _safewalkerRepository.Get(email);
+            if (safewalker == null)
+            {
+                return NotFound();
+            }
+            return Ok(safewalker);
         }
 
         // PUT: api/Safewalkers/{email}
@@ -59,13 +66,19 @@ namespace SafewalkApplication.Controllers
         [HttpPut("{email}")]
         public async Task<IActionResult> PutSafewalker([FromHeader] string token, [FromRoute] string email, [FromBody] Safewalker safewalker)
         {
-            return Ok();
+            if (!(await _safewalkerRepository.Authenticated(token)))
+            {
+                return Unauthorized();
+            }
+            var oldWalker = await _safewalkerRepository.Get(email);
+            if (oldWalker == null)
+            {
+                return NotFound();
+            }
+            oldWalker.MapFields(safewalker);
+
+            return Ok(await _safewalkerRepository.Update(oldWalker));
         }
 
-        // check if safewalker exists
-        private bool SafewalkerExists(string email)
-        {
-            return true;
-        }
     }
 }

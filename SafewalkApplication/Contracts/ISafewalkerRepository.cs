@@ -10,7 +10,7 @@ namespace SafewalkApplication.Contracts
     {
         Task<Safewalker> Get(string email);
 
-        Task<User> Update(string email, Safewalker safewalker);
+        Task<Safewalker> Update(Safewalker safewalker);
         
         Task<bool> Exists(string email);
 

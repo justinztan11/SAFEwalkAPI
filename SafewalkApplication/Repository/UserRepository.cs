@@ -29,7 +29,7 @@ namespace SafewalkApplication.Repository
             return await _context.User.SingleOrDefaultAsync(m => m.Email == email);
         }
 
-        public async Task<User> Update(string email, User user)
+        public async Task<User> Update(User user)
         {
             _context.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             await _context.SaveChangesAsync();
