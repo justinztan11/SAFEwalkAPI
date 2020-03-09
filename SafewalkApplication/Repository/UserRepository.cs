@@ -47,9 +47,9 @@ namespace SafewalkApplication.Repository
             return await _context.User.AnyAsync(m => m.Email == email);
         }
 
-        public Task<bool> Authenticated(string token)
+        public Task<bool> Authenticated(string token, string email)
         {
-            return _context.User.AnyAsync(m => m.Token == token);
+            return _context.User.AnyAsync(m => m.Token == token && m.Email == email);
         }
     }
 }

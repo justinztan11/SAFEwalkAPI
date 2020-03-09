@@ -34,21 +34,15 @@ namespace SafewalkApplication.Controllers
                 return BadRequest();
             }
 
-            if ((bool)isUser) // if User
+            // if user and not authenticated
+            if ((bool)isUser && !await _userRepository.Authenticated(token, email))
             {
-                // if not signed in and authenticated
-                if (!(await _userRepository.Authenticated(token)))
-                {
-                    // return error authentication message
-                }
+                return Unauthorized();
             }
-            else // if Safewalker
+            // is safewalker and not authenticated
+            else if ((bool)!isUser && !await _safewalkerRepository.Authenticated(token, email))
             {
-                // if not signed in and authenticated
-                if (!(await _safewalkerRepository.Authenticated(token)))
-                {
-                    // return error authentication message
-                }
+                return Unauthorized();
             }
 
             return Ok();

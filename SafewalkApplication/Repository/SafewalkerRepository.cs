@@ -32,9 +32,9 @@ namespace SafewalkApplication.Repository
             throw new NotImplementedException();
         }
 
-        public Task<bool> Authenticated(string token)
+        public Task<bool> Authenticated(string token, string email)
         {
-            return _context.Safewalker.AnyAsync(m => m.Token == token);
+            return _context.Safewalker.AnyAsync(m => m.Token == token && m.Email == email);
         }
     }
 }
