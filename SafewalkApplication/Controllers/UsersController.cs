@@ -29,20 +29,15 @@ namespace SafewalkApplication.Controllers
         // Authorization: User, Safewalker
         // Unauthorized Fields: Id, Password, Token
         [HttpGet("{email}")]
-        public async Task<ActionResult<User>> GetUser([FromHeader] string? token, [FromRoute] string? email, [FromHeader] bool? isUser)
+        public async Task<ActionResult<User>> GetUser([FromHeader] string token, [FromRoute] string email, [FromHeader] bool isUser)
         {
-            if (token == null || email == null || isUser == null)
-            {
-                return BadRequest();
-            }
-
             // if user and not authenticated
-            if ((bool)isUser && !await _userRepository.Authenticated(token, email))
+            if (isUser && !await _userRepository.Authenticated(token, email))
             {
                 return Unauthorized();
             }
             // is safewalker and not authenticated
-            else if ((bool)!isUser && !await _safewalkerRepository.Authenticated(token, email))
+            else if (!isUser && !await _safewalkerRepository.Authenticated(token, email))
             {
                 return Unauthorized();
             }
@@ -53,6 +48,7 @@ namespace SafewalkApplication.Controllers
                 return NotFound();
             }
             
+            user.WithoutPrivateInfo();
             return Ok(user);
         }
 
@@ -60,21 +56,23 @@ namespace SafewalkApplication.Controllers
         // Authorization: User
         // Unauthorized Fields: Id, Password, Token
         [HttpPut("{email}")]
-        public async Task<IActionResult> PutUser([FromHeader] string token, [FromRoute] string email, [FromBody] User user)
+        public async Task<ActionResult<User>> PutUser([FromHeader] string token, [FromRoute] string email, [FromBody] User user)
         {
             if (!(await _userRepository.Authenticated(token, email)))
             {
                 return Unauthorized();
             }
-            var oldUser = await _userRepository.Get(email);
 
+            var oldUser = await _userRepository.Get(email);
             if (oldUser == null) 
             {
                 return NotFound();
             }
 
             oldUser.MapFields(user);
-            return Ok(await _userRepository.Update(oldUser));
+            var newUser = await _userRepository.Update(oldUser);
+            newUser.WithoutPrivateInfo();
+            return Ok(newUser);
         }
 
         // POST: api/Users
@@ -89,6 +87,7 @@ namespace SafewalkApplication.Controllers
             Guid guid = Guid.NewGuid();
             user.Id = guid.ToString();
             await _userRepository.Add(user);
+            user.WithoutPrivateInfo();
             return Ok(user);
         }
 
@@ -102,19 +101,15 @@ namespace SafewalkApplication.Controllers
                 return Unauthorized();
             }
 
-            if (token == null || email == null)
+            if (!await _userRepository.Exists(email))
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            if (await _userRepository.Exists(email))
-            {
-                var user = await _userRepository.Get(email);
-                await _userRepository.Delete(email);
-                return Ok();
-            }
-            
-            return NotFound();
+            var user = await _userRepository.Get(email);
+            user.WithoutPrivateInfo();
+            await _userRepository.Delete(email);
+            return Ok(user);
         }
     }
 }

@@ -12,12 +12,14 @@ namespace SafewalkApplication.Helpers
         {
             oldWalk.WalkerEmail = newWalk.WalkerEmail ?? oldWalk.WalkerEmail;
             oldWalk.Status = newWalk.Status ?? oldWalk.Status;
+            
             return oldWalk;
         }
 
         public static Walk MapFieldsUser(this Walk oldWalk, Walk newWalk)
         {
             oldWalk.Status = newWalk.Status ?? oldWalk.Status;
+            
             return oldWalk;
         }
 
@@ -41,10 +43,8 @@ namespace SafewalkApplication.Helpers
             oldWalker.Password = newWalker.Password ?? newWalker.Password;
             oldWalker.PhoneNumber = newWalker.PhoneNumber ?? newWalker.PhoneNumber;
             oldWalker.LastName = newWalker.LastName ?? newWalker.LastName;
-            oldWalker.Email = newWalker.Email ?? newWalker.Email;
             oldWalker.PhoneNumber = newWalker.PhoneNumber ?? newWalker.PhoneNumber;
             oldWalker.Photo = newWalker.Photo ?? newWalker.Photo;
-
 
             return oldWalker;
         }

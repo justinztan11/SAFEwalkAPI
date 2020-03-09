@@ -22,18 +22,14 @@ namespace SafewalkApplication.Controllers
 
         // GET: api/Login
         [HttpGet]
-        public async Task<ActionResult<string>> GetLogin([FromHeader] string? email, [FromHeader] string? password, [FromHeader] bool? isUser)
+        public async Task<ActionResult<string>> GetLogin([FromHeader] string email, [FromHeader] string password, [FromHeader] bool isUser)
         {
-            if (email == null || password == null || isUser == null)
-            {
-                return BadRequest();
-            }
-
             IPerson? person = null;
-            if ((bool)isUser)
+            if (isUser)
             {
                 person = await _loginRepository.GetUser(email, password);
-            } else
+            } 
+            else
             {
                 person = await _loginRepository.GetWalker(email, password);
             }

@@ -24,7 +24,7 @@ namespace SafewalkApplication.Repository
 
         public async Task<Safewalker> Update(Safewalker safewalker)
         {
-            _context.Entry(safewalker).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.Entry(safewalker).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return safewalker;
         }

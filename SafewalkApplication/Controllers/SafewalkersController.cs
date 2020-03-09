@@ -29,49 +29,50 @@ namespace SafewalkApplication.Controllers
         // Authorization: User, Safewalker
         // Unauthorized Fields: Id, Password, Token
         [HttpGet("{email}")]
-        public async Task<ActionResult<Safewalker>> GetSafewalker([FromHeader] string? token, [FromRoute] string? email, [FromHeader] bool? isUser)
+        public async Task<ActionResult<Safewalker>> GetSafewalker([FromHeader] string token, [FromRoute] string email, [FromHeader] bool isUser)
         {
-            if (token == null || email == null || isUser == null)
-            {
-                return BadRequest();
-            }
-
             // if user and not authenticated
-            if ((bool)isUser && !await _userRepository.Authenticated(token, email))
+            if (isUser && !await _userRepository.Authenticated(token, email))
             {
                 return Unauthorized();
             }
             // is safewalker and not authenticated
-            else if ((bool)!isUser && !await _safewalkerRepository.Authenticated(token, email))
+            else if (!isUser && !await _safewalkerRepository.Authenticated(token, email))
             {
                 return Unauthorized();
             }
 
-            var safewalker = await _safewalkerRepository.Get(email);
-            if (safewalker == null)
+            var walker = await _safewalkerRepository.Get(email);
+            if (walker == null)
             {
                 return NotFound();
             }
-            return Ok(safewalker);
+
+            walker.WithoutPrivateInfo();
+            return Ok(walker);
         }
 
         // PUT: api/Safewalkers/{email}
         // Authorization: Safewalker
         [HttpPut("{email}")]
-        public async Task<IActionResult> PutSafewalker([FromHeader] string token, [FromRoute] string email, [FromBody] Safewalker safewalker)
+        public async Task<IActionResult> PutSafewalker([FromHeader] string token, [FromRoute] string email, [FromBody] Safewalker walker)
         {
+            // if safewalker not authenticated
             if (!(await _safewalkerRepository.Authenticated(token, email)))
             {
                 return Unauthorized();
             }
+
             var oldWalker = await _safewalkerRepository.Get(email);
             if (oldWalker == null)
             {
                 return NotFound();
             }
-            oldWalker.MapFields(safewalker);
-
-            return Ok(await _safewalkerRepository.Update(oldWalker));
+            
+            oldWalker.MapFields(walker);
+            var newWalker = await _safewalkerRepository.Update(oldWalker);
+            newWalker.WithoutPrivateInfo();
+            return Ok(newWalker);
         }
 
     }

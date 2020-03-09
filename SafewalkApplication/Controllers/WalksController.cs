@@ -30,13 +30,8 @@ namespace SafewalkApplication.Controllers
         // GET: api/Walks
         // Authorization: Safewalker
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Walk>>> GetWalks([FromHeader] string? token, [FromHeader] string? email)
+        public async Task<ActionResult<IEnumerable<Walk>>> GetWalks([FromHeader] string token, [FromHeader] string email)
         {
-            if (token == null) // if no token
-            {
-                return BadRequest();
-            }
-
             // if not signed in and authenticated
             if (!(await _safewalkerRepository.Authenticated(token, email)))
             {
@@ -56,21 +51,16 @@ namespace SafewalkApplication.Controllers
         // GET: api/Walks/{id}
         // Authorization: User, Safewalker
         [HttpGet("{id}")]
-        public async Task<ActionResult<Walk>> GetWalk([FromHeader] string? token, [FromHeader] string? email, 
-            [FromRoute] string? id, [FromHeader] bool? isUser)
+        public async Task<ActionResult<Walk>> GetWalk([FromHeader] string token, [FromHeader] string email, 
+            [FromRoute] string id, [FromHeader] bool isUser)
         {
-            if (token == null || id == null || isUser == null) // if empty field
-            {
-                return BadRequest();
-            }
-
             // if user and not authenticated
-            if ((bool)isUser && !await _userRepository.Authenticated(token, email)) 
+            if (isUser && !await _userRepository.Authenticated(token, email)) 
             {
                 return Unauthorized();
             }
             // is safewalker and not authenticated
-            else if ((bool)!isUser && !await _safewalkerRepository.Authenticated(token, email))
+            else if (!isUser && !await _safewalkerRepository.Authenticated(token, email))
             {
                 return Unauthorized();
             }
@@ -82,11 +72,11 @@ namespace SafewalkApplication.Controllers
             }
 
             // Check if person is part of the walk
-            if ((bool)isUser && walk.UserEmail != email)
+            if (isUser && walk.UserEmail != email)
             {
                 return Unauthorized();
             }
-            else if ((bool)!isUser && walk.WalkerEmail != email)
+            else if (!isUser && walk.WalkerEmail != email)
             {
                 return Unauthorized();
             }
@@ -97,21 +87,16 @@ namespace SafewalkApplication.Controllers
         // GET: api/Walks/{id}/status
         // Authorization: User, Safewalker
         [HttpGet("{id}/status")]
-        public async Task<ActionResult<int>> GetWalkStatus([FromHeader] string? token, [FromHeader] string? email,
-            [FromRoute] string? id, [FromHeader] bool? isUser)
+        public async Task<ActionResult<int>> GetWalkStatus([FromHeader] string token, [FromHeader] string email,
+            [FromRoute] string id, [FromHeader] bool isUser)
         {
-            if (token == null || id == null || isUser == null) // if empty field
-            {
-                return BadRequest();
-            }
-
             // if user and not authenticated
-            if ((bool)isUser && !await _userRepository.Authenticated(token, email))
+            if (isUser && !await _userRepository.Authenticated(token, email))
             {
                 return Unauthorized();
             }
             // is safewalker and not authenticated
-            else if ((bool)!isUser && !await _safewalkerRepository.Authenticated(token, email))
+            else if (!isUser && !await _safewalkerRepository.Authenticated(token, email))
             {
                 return Unauthorized();
             }
@@ -124,11 +109,11 @@ namespace SafewalkApplication.Controllers
             }
 
             // Check if person is part of the walk
-            if ((bool)isUser && walk.UserEmail != email)
+            if (isUser && walk.UserEmail != email)
             {
                 return Unauthorized();
             }
-            else if ((bool)!isUser && walk.WalkerEmail != email)
+            else if (!isUser && walk.WalkerEmail != email)
             {
                 return Unauthorized();
             }
@@ -139,21 +124,16 @@ namespace SafewalkApplication.Controllers
         // GET: api/Walks/{id}/location
         // Authorization: User, Safewalker
         [HttpGet("{id}/location")]
-        public async Task<ActionResult<Walk>> GetWalkerLocation([FromHeader] string? token, [FromHeader] string? email,
-            [FromRoute] string? id, [FromHeader] bool? isUser)
+        public async Task<ActionResult<Walk>> GetWalkerLocation([FromHeader] string token, [FromHeader] string email,
+            [FromRoute] string id, [FromHeader] bool isUser)
         {
-            if (token == null || id == null || isUser == null) // if empty field
-            {
-                return BadRequest();
-            }
-
             // if user and not authenticated
-            if ((bool)isUser && !await _userRepository.Authenticated(token, email))
+            if (isUser && !await _userRepository.Authenticated(token, email))
             {
                 return Unauthorized();
             }
             // is safewalker and not authenticated
-            else if ((bool)!isUser && !await _safewalkerRepository.Authenticated(token, email))
+            else if (!isUser && !await _safewalkerRepository.Authenticated(token, email))
             {
                 return Unauthorized();
             }
@@ -167,11 +147,11 @@ namespace SafewalkApplication.Controllers
             }
 
             // Check if person is part of the walk
-            if ((bool)isUser && walk.UserEmail != email)
+            if (isUser && walk.UserEmail != email)
             {
                 return Unauthorized();
             }
-            else if ((bool)!isUser && walk.WalkerEmail != email)
+            else if (!isUser && walk.WalkerEmail != email)
             {
                 return Unauthorized();
             }
@@ -185,21 +165,16 @@ namespace SafewalkApplication.Controllers
         // User Field Access: Status
         // Safewalker Field Access: Status, WalkerEmail
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutWalk([FromHeader] string? token, [FromHeader] string? email,
-            [FromRoute] string? id, [FromHeader] bool? isUser, [FromBody] Walk walk)
+        public async Task<IActionResult> PutWalk([FromHeader] string token, [FromHeader] string email,
+            [FromRoute] string id, [FromHeader] bool isUser, [FromBody] Walk walk)
         {
-            if (token == null || id == null || isUser == null) // if empty field
-            {
-                return BadRequest();
-            }
-
             // if user and not authenticated
-            if ((bool)isUser && !await _userRepository.Authenticated(token, email))
+            if (isUser && !await _userRepository.Authenticated(token, email))
             {
                 return Unauthorized();
             }
             // is safewalker and not authenticated
-            else if ((bool)!isUser && !await _safewalkerRepository.Authenticated(token, email))
+            else if (!isUser && !await _safewalkerRepository.Authenticated(token, email))
             {
                 return Unauthorized();
             }
@@ -211,17 +186,13 @@ namespace SafewalkApplication.Controllers
             }
 
             // Check if person is part of the walk
-            if ((bool)isUser && oldWalk.UserEmail != email)
-            {
-                return Unauthorized();
-            }
-            else if ((bool)!isUser && oldWalk.WalkerEmail != email)
+            if (isUser && oldWalk.UserEmail != email)
             {
                 return Unauthorized();
             }
 
             // map fields from input walk to existing walk
-            if ((bool)isUser)
+            if (isUser)
             {
                 oldWalk.MapFieldsUser(walk);
             } 
@@ -230,25 +201,26 @@ namespace SafewalkApplication.Controllers
                 oldWalk.MapFieldsWalker(walk);
             }
 
-            await _walkRepository.Update(id, oldWalk);
-    
-            return Ok();
+            var newWalk = await _walkRepository.Update(id, oldWalk);
+            return Ok(newWalk);
         }
 
         // POST: api/Walk
         // Authorization: User
         // Field Access: 
         [HttpPost]
-        public async Task<ActionResult<Walk>> PostWalk([FromHeader] string? token, [FromBody] Walk? walk)
+        public async Task<ActionResult<Walk>> PostWalk([FromHeader] string token, [FromHeader] string email, [FromBody] Walk walk)
         {
-            if (token == null || walk == null ) // if empty field
+            // if user not authenticated
+            if (!await _userRepository.Authenticated(token, email))
             {
-                return BadRequest();
+                return Unauthorized();
             }
 
             Guid guid = Guid.NewGuid();
             walk.Id = guid.ToString();
             walk.Status = 0;
+            walk.UserEmail = email;
             await _walkRepository.Add(walk);
             return Ok(walk);
         }

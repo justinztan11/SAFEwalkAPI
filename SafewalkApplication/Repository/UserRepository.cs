@@ -31,7 +31,7 @@ namespace SafewalkApplication.Repository
 
         public async Task<User> Update(User user)
         {
-            _context.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.Entry(user).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return user;
         }
