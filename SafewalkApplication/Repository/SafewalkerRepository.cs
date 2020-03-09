@@ -17,19 +17,21 @@ namespace SafewalkApplication.Repository
             _context = context;
         }
 
-        public Task<Safewalker> Get(string email)
+        public async Task<Safewalker> Get(string email)
         {
-            throw new NotImplementedException();
+            return await _context.Safewalker.SingleOrDefaultAsync(m => m.Email == email);
         }
 
-        public Task<User> Update(string email, Safewalker safewalker)
+        public async Task<Safewalker> Update(Safewalker safewalker)
         {
-            throw new NotImplementedException();
+            _context.Entry(safewalker).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return safewalker;
         }
 
-        public Task<bool> Exists(string email)
+        public async Task<bool> Exists(string email)
         {
-            throw new NotImplementedException();
+            return await _context.Safewalker.AnyAsync(m => m.Email == email);
         }
 
         public Task<bool> Authenticated(string token, string email)

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SafewalkApplication.Contracts;
+using SafewalkApplication.Helpers;
 using SafewalkApplication.Models;
 
 #nullable enable
@@ -46,7 +47,6 @@ namespace SafewalkApplication.Controllers
                 return Unauthorized();
             }
 
-            // TODO: handle null user error
             var user = await _userRepository.Get(email);
             if (user == null)
             {
@@ -66,16 +66,15 @@ namespace SafewalkApplication.Controllers
             {
                 return Unauthorized();
             }
+            var oldUser = await _userRepository.Get(email);
 
-            // TODO populate old model into new model
+            if (oldUser == null) 
+            {
+                return NotFound();
+            }
 
-
-
-            return Ok(await _userRepository.Update(email, user));
-
-
-
-
+            oldUser.MapFields(user);
+            return Ok(await _userRepository.Update(oldUser));
         }
 
         // POST: api/Users
@@ -110,7 +109,9 @@ namespace SafewalkApplication.Controllers
 
             if (await _userRepository.Exists(email))
             {
-                return Ok(await _userRepository.Get(email));
+                var user = await _userRepository.Get(email);
+                await _userRepository.Delete(email);
+                return Ok();
             }
             
             return NotFound();

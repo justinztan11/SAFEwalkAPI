@@ -12,10 +12,12 @@ namespace SafewalkApplication.Contracts
 
         Task<User> Add(User user);
 
-        Task<User> Update(string email, User user);
+        Task<User> Update(User user);
 
         Task<bool> Exists(string email);
 
         Task<bool> Authenticated(string token, string email);
+
+        Task<User> Delete(string email);
     }
 }

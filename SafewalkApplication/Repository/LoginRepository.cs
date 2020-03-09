@@ -29,7 +29,7 @@ namespace SafewalkApplication.Repository
 
         public async Task<User> GetUser(string email, string password)
         {
-            var user = await _context.User.SingleAsync(m => m.Email == email && m.Password == password);
+            var user = await _context.User.SingleOrDefaultAsync(m => m.Email == email && m.Password == password);
 
             if (user == null)
             {
