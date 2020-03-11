@@ -33,35 +33,35 @@ namespace SafewalkApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //// start session
-            //services.AddSession(options => {
-            //    options.IdleTimeout = TimeSpan.FromMinutes(60);
-            //});
-
-            // configure strongly typed settings objects
-            var appSettingsSection = Configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(appSettingsSection);
-
-            // configure jwt authentication
-            var appSettings = appSettingsSection.Get<AppSettings>();
-            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
-            services.AddAuthentication(m =>
+            try
             {
-                m.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                m.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(m =>
-            {
-                m.RequireHttpsMetadata = false;
-                m.SaveToken = true;
-                m.TokenValidationParameters = new TokenValidationParameters
+                // configure strongly typed settings objects
+                var appSettingsSection = Configuration.GetSection("AppSettings");
+                services.Configure<AppSettings>(appSettingsSection);
+
+                // configure jwt authentication
+                var appSettings = appSettingsSection.Get<AppSettings>();
+                var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+                services.AddAuthentication(m =>
                 {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
+                    m.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    m.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(m =>
+                {
+                    m.RequireHttpsMetadata = false;
+                    m.SaveToken = true;
+                    m.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
+
+            }
+            catch (Exception e) { }
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILoginRepository, LoginRepository>();
@@ -81,21 +81,6 @@ namespace SafewalkApplication
             {
                 app.UseDeveloperExceptionPage();
             }
-           
-            //app.UseSession();
-
-            ////Add JWToken to all incoming HTTP Request Header
-            //app.Use(async (context, next) =>
-            //{
-            //    var JWToken = context.Session.GetString("JWToken");
-            //    if (!string.IsNullOrEmpty(JWToken))
-            //    {
-            //        context.Request.Headers.Add("Authorization", "Bearer " + JWToken);
-            //    }
-            //    await next();
-            //});
-            ////Add JWToken Authentication service
-            //app.UseAuthentication();
 
             app.UseHttpsRedirection();
 

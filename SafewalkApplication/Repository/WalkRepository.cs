@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SafewalkApplication.Contracts;
 using SafewalkApplication.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SafewalkApplication.Repository
@@ -24,11 +22,6 @@ namespace SafewalkApplication.Repository
             return walk;
         }
 
-        public async Task<bool> Exists(string id)
-        {
-            return await _context.Walk.AnyAsync(m => m.Id == id);
-        }
-
         public async Task<Walk> Get(string id)
         {
             return await _context.Walk.SingleOrDefaultAsync(m => m.Id == id);
@@ -44,6 +37,12 @@ namespace SafewalkApplication.Repository
             _context.Walk.Update(walk);
             await _context.SaveChangesAsync();
             return walk;
+        }
+
+        public async Task<bool> Exists(string email)
+        {
+            return await _context.Walk.AnyAsync(m => m.UserEmail == email 
+                && (m.Status == 0 || m.Status == 1));
         }
     }
 }

@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using SafewalkApplication.Contracts;
 using SafewalkApplication.Models;
 using SafewalkApplication.Helpers;
@@ -39,12 +37,6 @@ namespace SafewalkApplication.Controllers
             }
 
             IEnumerable<Walk> walkList = _walkRepository.GetAll();
-
-            if (!walkList.Any<Walk>()) // if there are no walks 
-            {
-                return NotFound();
-            }
-            
             return Ok(new ObjectResult(walkList));
         }
 
@@ -102,8 +94,13 @@ namespace SafewalkApplication.Controllers
             }
 
             var walk = await _walkRepository.Get(id);
+            if (walk == null)
+            {
+                return NotFound();
+            }
+
             var status = walk.Status;
-            if (walk == null || status == null)
+            if (status == null)
             {
                 return NotFound();
             }
@@ -139,9 +136,14 @@ namespace SafewalkApplication.Controllers
             }
 
             var walk = await _walkRepository.Get(id);
+            if (walk == null)
+            {
+                return NotFound();
+            }
+
             var currLat = walk.WalkerCurrLat;
             var currLng = walk.WalkerCurrLng;
-            if (walk == null || currLat == null || currLng == null)
+            if (currLat == null || currLng == null)
             {
                 return NotFound();
             }
@@ -192,14 +194,11 @@ namespace SafewalkApplication.Controllers
             }
 
             // map fields from input walk to existing walk
-            if (isUser)
+            oldWalk.MapFields(walk);
+            if (!isUser)
             {
-                oldWalk.MapFieldsUser(walk);
+                oldWalk.WalkerEmail = email;
             } 
-            else
-            {
-                oldWalk.MapFieldsWalker(walk);
-            }
 
             var newWalk = await _walkRepository.Update(id, oldWalk);
             return Ok(newWalk);
@@ -217,10 +216,16 @@ namespace SafewalkApplication.Controllers
                 return Unauthorized();
             }
 
+            if (await _walkRepository.Exists(email))
+            {
+                return Conflict();
+            }
+
             Guid guid = Guid.NewGuid();
             walk.Id = guid.ToString();
             walk.Status = 0;
             walk.UserEmail = email;
+            walk.WithoutWalkerInfo();
             await _walkRepository.Add(walk);
             return Ok(walk);
         }

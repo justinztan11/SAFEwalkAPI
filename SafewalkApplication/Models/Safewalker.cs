@@ -1,6 +1,4 @@
 ﻿using SafewalkApplication.Contracts;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SafewalkApplication.Models

@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SafewalkApplication.Contracts;
-using System;
-using System.Collections.Generic;
+﻿using SafewalkApplication.Contracts;
 using System.ComponentModel.DataAnnotations;
 
 namespace SafewalkApplication.Models

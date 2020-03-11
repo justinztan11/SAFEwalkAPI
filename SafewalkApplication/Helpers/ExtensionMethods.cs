@@ -1,8 +1,4 @@
 ﻿using SafewalkApplication.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SafewalkApplication.Helpers
 {
@@ -13,6 +9,7 @@ namespace SafewalkApplication.Helpers
             user.Id = null;
             user.Password = null;
             user.Token = null;
+
             return user;
         }
 
@@ -21,7 +18,17 @@ namespace SafewalkApplication.Helpers
             walker.Id = null;
             walker.Password = null;
             walker.Token = null;
+
             return walker;
+        }
+
+        public static Walk WithoutWalkerInfo(this Walk walk)
+        {
+            walk.WalkerEmail = null;
+            walk.WalkerCurrLat = null;
+            walk.WalkerCurrLng = null;
+
+            return walk;
         }
     }
 }

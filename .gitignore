@@ -1,3 +1,5 @@
 .vs
 SafewalkApplication/bin/*
 SafewalkApplication/obj/*
+SafewalkApplication.Tests/bin/*
+SafewalkApplication.Tests/obj/*
