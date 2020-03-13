@@ -4,7 +4,6 @@ using SafewalkApplication.Contracts;
 using SafewalkApplication.Helpers;
 using SafewalkApplication.Models;
 
-#nullable enable
 namespace SafewalkApplication.Controllers
 {
     [Route("api/[controller]")]

@@ -2,7 +2,6 @@ C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\bin\Debug\ne
 C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\bin\Debug\netcoreapp3.1\SafewalkApplication.exe
-C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\obj\Debug\netcoreapp3.1\SafewalkApplication.csprojAssemblyReference.cache
 C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\obj\Debug\netcoreapp3.1\staticwebassets\SafewalkApplication.StaticWebAssets.Manifest.cache
 C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\obj\Debug\netcoreapp3.1\staticwebassets\SafewalkApplication.StaticWebAssets.xml
 C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\obj\Debug\netcoreapp3.1\SafewalkApplication.AssemblyInfoInputs.cache
@@ -298,3 +297,4 @@ C:\Users\yoon1\OneDrive\Code Files\CS506\SAFEwalkAPI\SafewalkApplication\obj\Deb
 C:\Users\yoon1\OneDrive\Code Files\CS506\SAFEwalkAPI\SafewalkApplication\obj\Debug\netcoreapp3.1\SafewalkApplication.csproj.CopyComplete
 C:\Users\yoon1\OneDrive\Code Files\CS506\SAFEwalkAPI\SafewalkApplication\obj\Debug\netcoreapp3.1\SafewalkApplication.dll
 C:\Users\yoon1\OneDrive\Code Files\CS506\SAFEwalkAPI\SafewalkApplication\obj\Debug\netcoreapp3.1\SafewalkApplication.pdb
+C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\obj\Debug\netcoreapp3.1\SafewalkApplication.csprojAssemblyReference.cache

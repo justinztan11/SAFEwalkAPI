@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using SafewalkApplication.Contracts;
@@ -10,21 +11,24 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
+#nullable enable
 namespace SafewalkApplication.Repository
 {
     public class LoginRepository : ILoginRepository
     {
         private readonly SafewalkDatabaseContext _context;
         private readonly AppSettings _appSettings;
+        private IMemoryCache _cache;
 
-        public LoginRepository(SafewalkDatabaseContext context, IOptions<AppSettings> appSettings)
+        public LoginRepository(SafewalkDatabaseContext context, IOptions<AppSettings> appSettings, IMemoryCache cache)
         {
             _context = context;
             _appSettings = appSettings.Value;
+            _cache = cache;
         }
 
 
-        public async Task<User> GetUser(string email, string password)
+        public async Task<string?> GetUser(string email, string password)
         {
             var user = await _context.User.SingleOrDefaultAsync(m => m.Email == email && m.Password == password);
 
@@ -47,17 +51,19 @@ namespace SafewalkApplication.Repository
             var token = tokenHandler.CreateToken(tokenDescriptor);
             user.Token = tokenHandler.WriteToken(token);
 
+            // update db with token
             _context.User.Update(user);
             await _context.SaveChangesAsync();
 
-            return user;
+            // add user to cache
+            var cacheEntryOptions = new MemoryCacheEntryOptions()
+                .SetSlidingExpiration(TimeSpan.FromMinutes(60));
+            _cache.Set(email, user, cacheEntryOptions);
 
-            // set up later
-            //return user.WithoutPassword();
-
+            return user.Token;
         }
 
-        public async Task<Safewalker> GetWalker(string email, string password)
+        public async Task<string?> GetWalker(string email, string password)
         {
             var walker = await _context.Safewalker.SingleOrDefaultAsync(m => m.Email == email && m.Password == password);
 
@@ -80,13 +86,16 @@ namespace SafewalkApplication.Repository
             var token = tokenHandler.CreateToken(tokenDescriptor);
             walker.Token = tokenHandler.WriteToken(token);
 
+            // update db with token
             _context.Safewalker.Update(walker);
             await _context.SaveChangesAsync();
 
-            return walker;
+            // add walker to cache
+            var cacheEntryOptions = new MemoryCacheEntryOptions()
+                .SetSlidingExpiration(TimeSpan.FromMinutes(60));
+            _cache.Set(email, walker, cacheEntryOptions);
 
-            // set up later
-            //return walker.WithoutPassword();
+            return walker.Token;
         }
     }
 }

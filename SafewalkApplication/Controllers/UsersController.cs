@@ -5,7 +5,6 @@ using SafewalkApplication.Contracts;
 using SafewalkApplication.Helpers;
 using SafewalkApplication.Models;
 
-#nullable enable
 namespace SafewalkApplication.Controllers
 {
     [Route("api/[controller]")]
@@ -86,7 +85,7 @@ namespace SafewalkApplication.Controllers
             user.WithoutPrivateInfo();
             return Ok(user);
         }
-
+        
         // DELETE: api/Users/{email}
         // Authorization: User
         [HttpDelete("{email}")]
