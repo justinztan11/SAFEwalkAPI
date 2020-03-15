@@ -38,11 +38,6 @@ namespace SafewalkApplication.Controllers
             }
 
             var walker = await _safewalkerRepository.Get(email);
-            if (walker == null)
-            {
-                return NotFound();
-            }
-
             walker.WithoutPrivateInfo();
             return Ok(walker);
         }

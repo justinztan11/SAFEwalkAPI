@@ -11,9 +11,11 @@ namespace SafewalkApplication.Controllers
     public class LoginController : ControllerBase
     {
         private readonly ILoginRepository _loginRepository;
-        public LoginController(ILoginRepository loginRepository)
+        private readonly IUserRepository _userRepository;
+        public LoginController(ILoginRepository loginRepository, IUserRepository userRepository)
         {
             _loginRepository = loginRepository;
+            _userRepository = userRepository;
         }
 
         // GET: api/Login
@@ -41,6 +43,18 @@ namespace SafewalkApplication.Controllers
                 return NotFound();
             }
    
+        }
+
+        // GET: api/Login/
+        [HttpGet]
+        public async Task<ActionResult<bool>> VerifyUser([FromHeader] string email)
+        {
+            if (!await _userRepository.Exists(email))
+            {
+                return Ok(false);
+            }
+
+            return Ok(true);
         }
 
     }

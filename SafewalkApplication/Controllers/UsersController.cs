@@ -39,11 +39,6 @@ namespace SafewalkApplication.Controllers
             }
 
             var user = await _userRepository.Get(email);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            
             user.WithoutPrivateInfo();
             return Ok(user);
         }
@@ -60,11 +55,6 @@ namespace SafewalkApplication.Controllers
             }
 
             var oldUser = await _userRepository.Get(email);
-            if (oldUser == null) 
-            {
-                return NotFound();
-            }
-
             oldUser.MapFields(user);
             var newUser = await _userRepository.Update(oldUser);
             newUser.WithoutPrivateInfo();
