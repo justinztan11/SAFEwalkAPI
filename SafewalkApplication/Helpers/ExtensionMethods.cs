@@ -1,4 +1,6 @@
 ﻿using SafewalkApplication.Models;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace SafewalkApplication.Helpers
 {
@@ -29,6 +31,34 @@ namespace SafewalkApplication.Helpers
             walk.WalkerCurrLng = null;
 
             return walk;
+        }
+
+        public static User WithoutTempAuth(this User user)
+        {
+            // user.socketId = null;
+            user.Token = null;
+
+            return user;
+        }
+
+        public static Safewalker WithoutTempAuth(this Safewalker walker)
+        {
+            // walker.socketId = null;
+            walker.Token = null;
+
+            return walker;
+        }
+
+        // Deep clone
+        public static T DeepClone<T>(this T a)
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(stream, a);
+                stream.Position = 0;
+                return (T)formatter.Deserialize(stream);
+            }
         }
     }
 }

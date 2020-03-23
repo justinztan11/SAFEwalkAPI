@@ -4,7 +4,6 @@ using SafewalkApplication.Contracts;
 using SafewalkApplication.Helpers;
 using SafewalkApplication.Models;
 
-#nullable enable
 namespace SafewalkApplication.Controllers
 {
     [Route("api/[controller]")]
@@ -61,8 +60,8 @@ namespace SafewalkApplication.Controllers
             
             oldWalker.MapFields(walker);
             var newWalker = await _safewalkerRepository.Update(oldWalker);
-            newWalker.WithoutPrivateInfo();
-            return Ok(newWalker);
+            var copyWalker = newWalker.DeepClone().WithoutPrivateInfo();
+            return Ok(copyWalker);
         }
 
     }

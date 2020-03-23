@@ -23,7 +23,7 @@ namespace SafewalkApplication.Tests
 
         [TestMethod]
         [DataRow("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjM5MTg0MzkxLTczZDEtNGJjOC05NjQ3LTlkYmVmZjcxMTAyYiIsIm5iZiI6MTU4Mzc2Mzg1MiwiZXhwIjoxNTgzODUwMjUyLCJpYXQiOjE1ODM3NjM4NTJ9.ihcQU9HSMgs78yCaWs4RRV4Fkx1_Bsj2C2EZNi-9cjE", "deuman@wisc.edu", "true")]
-        [DataRow("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjcyaDBmNzg0ZzhoZiIsIm5iZiI6MTU4NDAzNDkwNywiZXhwIjoxNTg0MTIxMzA3LCJpYXQiOjE1ODQwMzQ5MDd9.RaH-9VoBIJjAGMlIOUPraIdvOJCXebh5nmFmVF0VNcs", "ycho@wisc.edu", "true")]
+        [DataRow("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjcyaDBmNzg0ZzhoZiIsIm5iZiI6MTU4NDk5MzEzNCwiZXhwIjoxNTg1MDc5NTM0LCJpYXQiOjE1ODQ5OTMxMzR9.waK8Eag-1rVbyDny5t_06qT-eG6Ham5n-hTHJ6ztQ6E", "ycho@wisc.edu", "true")]
 
         public void GetUser_Ok(string token, string email, string isUser)
         {
@@ -79,7 +79,7 @@ namespace SafewalkApplication.Tests
 
         [TestMethod]
         [DataRow("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjM5MTg0MzkxLTczZDEtNGJjOC05NjQ3LTlkYmVmZjcxMTAyYiIsIm5iZiI6MTU4Mzc2Mzg1MiwiZXhwIjoxNTgzODUwMjUyLCJpYXQiOjE1ODM3NjM4NTJ9.ihcQU9HSMgs78yCaWs4RRV4Fkx1_Bsj2C2EZNi-9cjE", "deuman@wisc.edu", "{\"LastName\":\"Deuman\", \"FirstName\":\"Freakin\", \"Password\":\"crap11\", \"PhoneNumber\":\"4567890\", \"HomeAddress\":\"lakeshore\"}")]
-        [DataRow("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjcyaDBmNzg0ZzhoZiIsIm5iZiI6MTU4NDAzNDkwNywiZXhwIjoxNTg0MTIxMzA3LCJpYXQiOjE1ODQwMzQ5MDd9.RaH-9VoBIJjAGMlIOUPraIdvOJCXebh5nmFmVF0VNcs", "ycho@wisc.edu", "{\"LastName\":\"Cho\", \"FirstName\":\"Yoon\", \"Password\":\"cat11\", \"PhoneNumber\":\"8342532244\", \"HomeAddress\":\"9384 street\"}")]
+        [DataRow("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjcyaDBmNzg0ZzhoZiIsIm5iZiI6MTU4NDk5MzEzNCwiZXhwIjoxNTg1MDc5NTM0LCJpYXQiOjE1ODQ5OTMxMzR9.waK8Eag-1rVbyDny5t_06qT-eG6Ham5n-hTHJ6ztQ6E", "ycho@wisc.edu", "{\"LastName\":\"Cho\", \"FirstName\":\"Yoon\", \"Password\":\"cat11\", \"PhoneNumber\":\"8342532244\", \"HomeAddress\":\"9384 street\"}")]
         public void PutUser_Ok(string token, string email, string user)
         {
             //Arrange

@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SafewalkApplication.Contracts;
 
-#nullable enable
 namespace SafewalkApplication.Controllers
 {
     [Produces("application/json")]
@@ -22,27 +21,23 @@ namespace SafewalkApplication.Controllers
         [HttpGet]
         public async Task<ActionResult<string>> GetLogin([FromHeader] string email, [FromHeader] string password, [FromHeader] bool isUser)
         {
-            IPerson? person = null;
+            string token;
             if (isUser)
             {
-                person = await _loginRepository.GetUser(email, password);
+
+                token = await _loginRepository.GetUser(email, password);
             }
             else
             {
-                person = await _loginRepository.GetWalker(email, password);
+                token = await _loginRepository.GetWalker(email, password);
             }
 
-            if (person != null)
-            {
-                var token = person.Token;
-                ////Save token in session object
-                //HttpContext.Session.SetString("JWToken", token);
-                return Ok(token);
-            } else
+            if (token == null)
             {
                 return NotFound();
             }
 
+            return Ok(token);
         }
 
         // GET: api/Login/{email}
@@ -56,6 +51,5 @@ namespace SafewalkApplication.Controllers
 
             return Ok();
         }
-
     }
 }

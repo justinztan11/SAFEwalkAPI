@@ -68,6 +68,8 @@ namespace SafewalkApplication
             services.AddScoped<ISafewalkerRepository, SafewalkerRepository>();
             services.AddScoped<IWalkRepository, WalkRepository>();
 
+            services.AddMemoryCache();
+
             services.AddControllers();
 
             var connection = "Server=tcp:safewalkdb.database.windows.net,1433;Initial Catalog=SafewalkDatabase;Persist Security Info=False;User ID=jztan2;Password=Safewalk11;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
