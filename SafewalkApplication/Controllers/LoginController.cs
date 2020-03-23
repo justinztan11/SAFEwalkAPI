@@ -26,7 +26,7 @@ namespace SafewalkApplication.Controllers
             if (isUser)
             {
                 person = await _loginRepository.GetUser(email, password);
-            } 
+            }
             else
             {
                 person = await _loginRepository.GetWalker(email, password);
@@ -42,19 +42,19 @@ namespace SafewalkApplication.Controllers
             {
                 return NotFound();
             }
-   
+
         }
 
-        // GET: api/Login/
-        [HttpGet]
-        public async Task<ActionResult<bool>> VerifyUser([FromHeader] string email)
+        // GET: api/Login/{email}
+        [HttpGet("{email}")]
+        public async Task<IActionResult> VerifyUser([FromRoute] string email)
         {
-            if (!await _userRepository.Exists(email))
+            if (await _userRepository.Exists(email))
             {
-                return Ok(false);
+                return Conflict();
             }
 
-            return Ok(true);
+            return Ok();
         }
 
     }

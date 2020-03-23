@@ -95,7 +95,7 @@ namespace SafewalkApplication.Tests
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         }
 
-        // PostUser Tests ----------------------------------------------------------------------
+/*        // PostUser Tests ----------------------------------------------------------------------
 
 
         [TestMethod]
@@ -147,6 +147,6 @@ namespace SafewalkApplication.Tests
 
             //Assert
             Assert.AreEqual(HttpStatusCode.Unauthorized, response.StatusCode);
-        }
+        }*/
     }
 }
