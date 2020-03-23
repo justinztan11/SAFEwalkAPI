@@ -25,7 +25,7 @@ namespace SafewalkApplication.Repository
 
             if (cachedWalker != null)
             {
-                return cachedWalker.DeepClone();
+                return cachedWalker;
             }
             else
             {
@@ -44,11 +44,15 @@ namespace SafewalkApplication.Repository
             }
         }
 
-        public async Task<Safewalker> Update(Safewalker safewalker)
+        public async Task<Safewalker> Update(Safewalker walker)
         {
-            _context.Entry(safewalker).State = EntityState.Modified;
+            var cacheEntryOptions = new MemoryCacheEntryOptions()
+                .SetSlidingExpiration(TimeSpan.FromMinutes(60));
+            _cache.Set(walker.Email, walker, cacheEntryOptions);
+
+            _context.Safewalker.Update(walker);
             await _context.SaveChangesAsync();
-            return safewalker;
+            return walker;
         }
 
         public async Task<bool> Exists(string email)

@@ -37,11 +37,6 @@ namespace SafewalkApplication.Controllers
             }
 
             var walker = await _safewalkerRepository.Get(email);
-            if (walker == null)
-            {
-                return NotFound();
-            }
-
             walker.WithoutPrivateInfo();
             return Ok(walker);
         }
@@ -65,8 +60,8 @@ namespace SafewalkApplication.Controllers
             
             oldWalker.MapFields(walker);
             var newWalker = await _safewalkerRepository.Update(oldWalker);
-            newWalker.WithoutPrivateInfo();
-            return Ok(newWalker);
+            var copyWalker = newWalker.DeepClone().WithoutPrivateInfo();
+            return Ok(copyWalker);
         }
 
     }

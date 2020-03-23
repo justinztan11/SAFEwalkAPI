@@ -32,7 +32,7 @@ namespace SafewalkApplication.Repository
             
             if (cachedUser != null)
             {
-                return cachedUser.DeepClone();
+                return cachedUser;
             } 
             else
             {
@@ -53,16 +53,24 @@ namespace SafewalkApplication.Repository
 
         public async Task<User> Update(User user)
         {
-            _context.Entry(user).State = EntityState.Modified;
+            var cacheEntryOptions = new MemoryCacheEntryOptions()
+                .SetSlidingExpiration(TimeSpan.FromMinutes(60));
+            _cache.Set(user.Email, user, cacheEntryOptions);
+
+            _context.User.Update(user);
             await _context.SaveChangesAsync();
+
             return user;
         }
 
         public async Task<User> Delete(string email)
         {
+            _cache.Remove(email);
+
             var user = await _context.User.SingleOrDefaultAsync(m => m.Email == email);
             _context.User.Remove(user);
             await _context.SaveChangesAsync();
+
             return user;
         }
 
