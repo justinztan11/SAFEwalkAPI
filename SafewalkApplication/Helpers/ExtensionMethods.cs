@@ -33,6 +33,22 @@ namespace SafewalkApplication.Helpers
             return walk;
         }
 
+        public static User WithoutTempAuth(this User user)
+        {
+            // user.socketId = null;
+            user.Token = null;
+
+            return user;
+        }
+
+        public static Safewalker WithoutTempAuth(this Safewalker walker)
+        {
+            // walker.socketId = null;
+            walker.Token = null;
+
+            return walker;
+        }
+
         // Deep clone
         public static T DeepClone<T>(this T a)
         {
