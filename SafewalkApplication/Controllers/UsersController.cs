@@ -97,26 +97,5 @@ namespace SafewalkApplication.Controllers
             await _userRepository.Delete(email);
             return Ok(user);
         }
-
-        // POST: api/Users/{email}
-        [HttpPost("{email}")]
-        public async Task<ActionResult<User>> PostLogOutUser([FromHeader] string token, [FromRoute] string email)
-        {
-            if (!(await _userRepository.Authenticated(token, email)))
-            {
-                return Unauthorized();
-            }
-
-            if (!await _userRepository.Exists(email))
-            {
-                return NotFound();
-            }
-
-            var oldUser = await _userRepository.Get(email);
-            oldUser.Token = null;
-            var newUser = await _userRepository.Update(oldUser);
-            newUser.WithoutPrivateInfo();
-            return Ok(newUser);
-        }
     }
 }
