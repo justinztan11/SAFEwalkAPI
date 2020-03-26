@@ -8834,19 +8834,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\justi\\.nuget\\packages\\": {}
+    "C:\\Users\\yoon1\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\justi\\source\\repos\\SafewalkApplication\\SafewalkApplication\\SafewalkApplication.csproj",
+      "projectUniqueName": "C:\\Users\\yoon1\\OneDrive\\Code Files\\CS506\\SAFEwalkAPI\\SafewalkApplication\\SafewalkApplication.csproj",
       "projectName": "SafewalkApplication",
-      "projectPath": "C:\\Users\\justi\\source\\repos\\SafewalkApplication\\SafewalkApplication\\SafewalkApplication.csproj",
-      "packagesPath": "C:\\Users\\justi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\justi\\source\\repos\\SafewalkApplication\\SafewalkApplication\\obj\\",
+      "projectPath": "C:\\Users\\yoon1\\OneDrive\\Code Files\\CS506\\SAFEwalkAPI\\SafewalkApplication\\SafewalkApplication.csproj",
+      "packagesPath": "C:\\Users\\yoon1\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\yoon1\\OneDrive\\Code Files\\CS506\\SAFEwalkAPI\\SafewalkApplication\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\justi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\yoon1\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8915,7 +8915,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
