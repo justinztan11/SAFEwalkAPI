@@ -1,8 +1,10 @@
 ﻿using SafewalkApplication.Contracts;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace SafewalkApplication.Models
 {
+    [Serializable]
     public partial class Safewalker : IPerson
     {
         public string Id { get; set; }

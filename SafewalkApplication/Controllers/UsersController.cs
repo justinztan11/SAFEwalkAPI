@@ -5,7 +5,6 @@ using SafewalkApplication.Contracts;
 using SafewalkApplication.Helpers;
 using SafewalkApplication.Models;
 
-#nullable enable
 namespace SafewalkApplication.Controllers
 {
     [Route("api/[controller]")]
@@ -57,8 +56,8 @@ namespace SafewalkApplication.Controllers
             var oldUser = await _userRepository.Get(email);
             oldUser.MapFields(user);
             var newUser = await _userRepository.Update(oldUser);
-            newUser.WithoutPrivateInfo();
-            return Ok(newUser);
+            var copyUser = newUser.DeepClone().WithoutPrivateInfo();
+            return Ok(copyUser);
         }
 
         // POST: api/Users
@@ -76,7 +75,7 @@ namespace SafewalkApplication.Controllers
             user.WithoutPrivateInfo();
             return Ok(user);
         }
-
+        
         // DELETE: api/Users/{email}
         // Authorization: User
         [HttpDelete("{email}")]

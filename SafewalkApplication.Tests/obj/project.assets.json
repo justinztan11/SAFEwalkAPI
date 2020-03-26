@@ -10191,19 +10191,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\yoon1\\.nuget\\packages\\": {}
+    "C:\\Users\\justi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\yoon1\\OneDrive\\Code Files\\CS506\\SAFEwalkAPI\\SafewalkApplication.Tests\\SafewalkApplication.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\justi\\source\\repos\\SafewalkApplication\\SafewalkApplication.Tests\\SafewalkApplication.Tests.csproj",
       "projectName": "SafewalkApplication.Tests",
-      "projectPath": "C:\\Users\\yoon1\\OneDrive\\Code Files\\CS506\\SAFEwalkAPI\\SafewalkApplication.Tests\\SafewalkApplication.Tests.csproj",
-      "packagesPath": "C:\\Users\\yoon1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\yoon1\\OneDrive\\Code Files\\CS506\\SAFEwalkAPI\\SafewalkApplication.Tests\\obj\\",
+      "projectPath": "C:\\Users\\justi\\source\\repos\\SafewalkApplication\\SafewalkApplication.Tests\\SafewalkApplication.Tests.csproj",
+      "packagesPath": "C:\\Users\\justi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\justi\\source\\repos\\SafewalkApplication\\SafewalkApplication.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\yoon1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\justi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10216,8 +10216,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\yoon1\\OneDrive\\Code Files\\CS506\\SAFEwalkAPI\\SafewalkApplication\\SafewalkApplication.csproj": {
-              "projectPath": "C:\\Users\\yoon1\\OneDrive\\Code Files\\CS506\\SAFEwalkAPI\\SafewalkApplication\\SafewalkApplication.csproj"
+            "C:\\Users\\justi\\source\\repos\\SafewalkApplication\\SafewalkApplication\\SafewalkApplication.csproj": {
+              "projectPath": "C:\\Users\\justi\\source\\repos\\SafewalkApplication\\SafewalkApplication\\SafewalkApplication.csproj"
             }
           }
         }

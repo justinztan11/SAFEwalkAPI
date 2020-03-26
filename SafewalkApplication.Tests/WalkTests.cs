@@ -262,7 +262,7 @@ namespace SafewalkApplication.Tests
         }
 
         [TestMethod]
-        [DataRow("ycho@wisc.edu", "{\"Time\":\"2020-03-10T06:27:40\", \"StartText\":\"home\", \"StartLat\": 123.022, \"StartLng\": 243.7654, \"DestText\":\"college\", \"DestLat\": 235.345, \"DestLng\": 765.732234}", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjcyaDBmNzg0ZzhoZiIsIm5iZiI6MTU4MzU0NDk5MiwiZXhwIjoxNTgzNjMxMzkyLCJpYXQiOjE1ODM1NDQ5OTJ9.58tRXuJDWU7g24YMQnFZEwPxDB18rRcug7x2yKQV1B8")]
+        [DataRow("ycho@wisc.edu", "{\"Time\":\"2020-03-10T06:27:40\", \"StartText\":\"home\", \"StartLat\": 123.022, \"StartLng\": 243.7654, \"DestText\":\"college\", \"DestLat\": 235.345, \"DestLng\": 765.732234}", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjcyaDBmNzg0ZzhoZiIsIm5iZiI6MTU4NDk5MzEzNCwiZXhwIjoxNTg1MDc5NTM0LCJpYXQiOjE1ODQ5OTMxMzR9.waK8Eag-1rVbyDny5t_06qT-eG6Ham5n-hTHJ6ztQ6E")]
         [DataRow("deuman@wisc.edu", "{\"StartText\":\"brandy street\",\"DestText\":\"memorial library\"}", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjM5MTg0MzkxLTczZDEtNGJjOC05NjQ3LTlkYmVmZjcxMTAyYiIsIm5iZiI6MTU4Mzc2Mzg1MiwiZXhwIjoxNTgzODUwMjUyLCJpYXQiOjE1ODM3NjM4NTJ9.ihcQU9HSMgs78yCaWs4RRV4Fkx1_Bsj2C2EZNi-9cjE")]
         public void PostWalk_Conflict(string email, string walk, string token)
         {
@@ -282,7 +282,7 @@ namespace SafewalkApplication.Tests
         // PutWalk Tests ----------------------------------------------------------------------
 
         [TestMethod]
-        [DataRow("ycho@wisc.edu", "true", "{\"Status\": 2}", "9955520d-b3f3-4e28-8a39-a9afabf1f1ff", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjcyaDBmNzg0ZzhoZiIsIm5iZiI6MTU4MzU0NDk5MiwiZXhwIjoxNTgzNjMxMzkyLCJpYXQiOjE1ODM1NDQ5OTJ9.58tRXuJDWU7g24YMQnFZEwPxDB18rRcug7x2yKQV1B8")]
+        [DataRow("ycho@wisc.edu", "true", "{\"Status\": 2}", "9955520d-b3f3-4e28-8a39-a9afabf1f1ff", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjcyaDBmNzg0ZzhoZiIsIm5iZiI6MTU4NDk5MzEzNCwiZXhwIjoxNTg1MDc5NTM0LCJpYXQiOjE1ODQ5OTMxMzR9.waK8Eag-1rVbyDny5t_06qT-eG6Ham5n-hTHJ6ztQ6E")]
         [DataRow("deuman@wisc.edu", "true", "{\"Status\": -1}", "33b93e7f-a8d8-441a-84d2-3e74bbc07b95", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjM5MTg0MzkxLTczZDEtNGJjOC05NjQ3LTlkYmVmZjcxMTAyYiIsIm5iZiI6MTU4Mzc2Mzg1MiwiZXhwIjoxNTgzODUwMjUyLCJpYXQiOjE1ODM3NjM4NTJ9.ihcQU9HSMgs78yCaWs4RRV4Fkx1_Bsj2C2EZNi-9cjE")]
         [DataRow("shimura@wisc.edu", "false", "{\"Status\": 1}", "v8hf93483r293r98", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEyMzQ1Njc4OTg3NjVoYyIsIm5iZiI6MTU4Mzc2NTE1MCwiZXhwIjoxNTgzODUxNTUwLCJpYXQiOjE1ODM3NjUxNTB9.lIqN2RuvbOK79Succ98r3DnlDa59MfahHddfNMyArsA")]
         public void PutWalk_Ok(string email, string isUser, string walk, string id, string token)
@@ -302,7 +302,7 @@ namespace SafewalkApplication.Tests
         }
 
         [TestMethod]
-        [DataRow("ycho@wisc.edu", "true", "{\"Status\": 2}", "33b93e7f-a8d8-441a-84d2-3e74bbc07b95", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjcyaDBmNzg0ZzhoZiIsIm5iZiI6MTU4MzU0NDk5MiwiZXhwIjoxNTgzNjMxMzkyLCJpYXQiOjE1ODM1NDQ5OTJ9.58tRXuJDWU7g24YMQnFZEwPxDB18rRcug7x2yKQV1B8")]
+        [DataRow("ycho@wisc.edu", "true", "{\"Status\": 2}", "33b93e7f-a8d8-441a-84d2-3e74bbc07b95", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjcyaDBmNzg0ZzhoZiIsIm5iZiI6MTU4NDk5MzEzNCwiZXhwIjoxNTg1MDc5NTM0LCJpYXQiOjE1ODQ5OTMxMzR9.waK8Eag-1rVbyDny5t_06qT-eG6Ham5n-hTHJ6ztQ6E")]
         [DataRow("deu@wisc.edu", "true", "{\"Status\": -1}", "33b93e7f-a8d8-441a-84d2-3e74bbc07b95", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjM5MTg0MzkxLTczZDEtNGJjOC05NjQ3LTlkYmVmZjcxMTAyYiIsIm5iZiI6MTU4Mzc2Mzg1MiwiZXhwIjoxNTgzODUwMjUyLCJpYXQiOjE1ODM3NjM4NTJ9.ihcQU9HSMgs78yCaWs4RRV4Fkx1_Bsj2C2EZNi-9cjE")]
         [DataRow("shimura@wisc.edu", "false", "{\"Status\": 1}", "v8hf93483r293r98", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEyMzQ1Njc4OTg3NjVoYyIsIm5iZiI6ME1ODM3NjUxNTB9.lIqN2RuvbOK79Succ98r3DnlDa59MfahHddfNMyArsA")]
         public void PutWalk_Unauthorized(string email, string isUser, string walk, string id, string token)
@@ -322,7 +322,7 @@ namespace SafewalkApplication.Tests
         }
 
         [TestMethod]
-        [DataRow("ycho@wisc.edu", "true", "{\"Status\": 2}", "9955520d-b3f3-4e28-8af1ff", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjcyaDBmNzg0ZzhoZiIsIm5iZiI6MTU4MzU0NDk5MiwiZXhwIjoxNTgzNjMxMzkyLCJpYXQiOjE1ODM1NDQ5OTJ9.58tRXuJDWU7g24YMQnFZEwPxDB18rRcug7x2yKQV1B8")]
+        [DataRow("ycho@wisc.edu", "true", "{\"Status\": 2}", "9955520d-b3f3-4e28-8af1ff", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjcyaDBmNzg0ZzhoZiIsIm5iZiI6MTU4NDk5MzEzNCwiZXhwIjoxNTg1MDc5NTM0LCJpYXQiOjE1ODQ5OTMxMzR9.waK8Eag-1rVbyDny5t_06qT-eG6Ham5n-hTHJ6ztQ6E")]
         [DataRow("deuman@wisc.edu", "true", "{\"Status\": -1}", "33b93e7f-3e74bbc07b95", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjM5MTg0MzkxLTczZDEtNGJjOC05NjQ3LTlkYmVmZjcxMTAyYiIsIm5iZiI6MTU4Mzc2Mzg1MiwiZXhwIjoxNTgzODUwMjUyLCJpYXQiOjE1ODM3NjM4NTJ9.ihcQU9HSMgs78yCaWs4RRV4Fkx1_Bsj2C2EZNi-9cjE")]
         [DataRow("shimura@wisc.edu", "false", "{\"Status\": 1}", "v8h93r98", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEyMzQ1Njc4OTg3NjVoYyIsIm5iZiI6MTU4Mzc2NTE1MCwiZXhwIjoxNTgzODUxNTUwLCJpYXQiOjE1ODM3NjUxNTB9.lIqN2RuvbOK79Succ98r3DnlDa59MfahHddfNMyArsA")]
         public void PutWalk_NotFound(string email, string isUser, string walk, string id, string token)
