@@ -35,7 +35,7 @@ namespace SafewalkApplication.Helpers
 
         public static User WithoutTempAuth(this User user)
         {
-            // user.socketId = null;
+            user.SocketId = null;
             user.Token = null;
 
             return user;
@@ -43,7 +43,7 @@ namespace SafewalkApplication.Helpers
 
         public static Safewalker WithoutTempAuth(this Safewalker walker)
         {
-            // walker.socketId = null;
+            walker.SocketId = null;
             walker.Token = null;
 
             return walker;

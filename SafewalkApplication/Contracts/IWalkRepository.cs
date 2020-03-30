@@ -12,7 +12,9 @@ namespace SafewalkApplication.Contracts
 
         Task<Walk> Add(Walk walk);
 
-        Task<Walk> Update(string email, Walk walk);
+        Task<Walk> Update(Walk walk);
+
+        Task<Walk> Delete(string id);
 
         Task<bool> Exists(string email);
     }

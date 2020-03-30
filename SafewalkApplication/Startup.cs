@@ -33,14 +33,14 @@ namespace SafewalkApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // configure strongly typed settings objects
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+            var appSettings = appSettingsSection.Get<AppSettings>();
+
             try
             {
-                // configure strongly typed settings objects
-                var appSettingsSection = Configuration.GetSection("AppSettings");
-                services.Configure<AppSettings>(appSettingsSection);
-
                 // configure jwt authentication
-                var appSettings = appSettingsSection.Get<AppSettings>();
                 var key = Encoding.ASCII.GetBytes(appSettings.Secret);
                 services.AddAuthentication(m =>
                 {
@@ -72,8 +72,8 @@ namespace SafewalkApplication
 
             services.AddControllers();
 
-            var connection = "Server=tcp:safewalkdb.database.windows.net,1433;Initial Catalog=SafewalkDatabase;Persist Security Info=False;User ID=jztan2;Password=Safewalk11;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            services.AddDbContext<Models.SafewalkDatabaseContext>(options => options.UseSqlServer(connection));
+            // for testing, plug in connection verbatim 
+            services.AddDbContext<Models.SafewalkDatabaseContext>(options => options.UseSqlServer(appSettings.Connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

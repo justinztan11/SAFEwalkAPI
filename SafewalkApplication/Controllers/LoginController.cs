@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SafewalkApplication.Contracts;
 
+#nullable enable
 namespace SafewalkApplication.Controllers
 {
     [Produces("application/json")]
