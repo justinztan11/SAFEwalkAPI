@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SafewalkApplication.Contracts;
 
+#nullable enable
 namespace SafewalkApplication.Controllers
 {
     [Produces("application/json")]
@@ -42,14 +43,26 @@ namespace SafewalkApplication.Controllers
 
         // GET: api/Login/{email}
         [HttpGet("{email}")]
-        public async Task<IActionResult> VerifyUser([FromRoute] string email)
+        public async Task<IActionResult> VerifyUser([FromRoute] string email, [FromHeader] string? password)
         {
-            if (await _userRepository.Exists(email))
+            if (password == null)
             {
-                return Conflict();
+                if (await _userRepository.Exists(email))
+                {
+                    return Conflict();
+                }
+                return Ok();
+            }
+            else
+            {
+                var user = await _userRepository.Get(email);
+                if (user == null || user.Password != password)
+                {
+                    return Conflict();
+                }
+                return Ok();
             }
 
-            return Ok();
         }
     }
 }
