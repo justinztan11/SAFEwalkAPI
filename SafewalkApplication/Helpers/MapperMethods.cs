@@ -20,19 +20,19 @@ namespace SafewalkApplication.Helpers
             oldUser.Photo = newUser.Photo ?? oldUser.Photo;
             oldUser.HomeAddress = newUser.HomeAddress ?? oldUser.HomeAddress;
             oldUser.Interest = newUser.Interest ?? oldUser.Interest;
+            oldUser.SocketId = newUser.SocketId ?? oldUser.SocketId;
 
             return oldUser;
         }
 
         public static Safewalker MapFields(this Safewalker oldWalker, Safewalker newWalker)
         {
-            oldWalker.LastName = newWalker.LastName ?? newWalker.LastName;
-            oldWalker.FirstName = newWalker.FirstName ?? newWalker.FirstName;
-            oldWalker.Password = newWalker.Password ?? newWalker.Password;
-            oldWalker.PhoneNumber = newWalker.PhoneNumber ?? newWalker.PhoneNumber;
-            oldWalker.LastName = newWalker.LastName ?? newWalker.LastName;
-            oldWalker.PhoneNumber = newWalker.PhoneNumber ?? newWalker.PhoneNumber;
-            oldWalker.Photo = newWalker.Photo ?? newWalker.Photo;
+            oldWalker.LastName = newWalker.LastName ?? oldWalker.LastName;
+            oldWalker.FirstName = newWalker.FirstName ?? oldWalker.FirstName;
+            oldWalker.Password = newWalker.Password ?? oldWalker.Password;
+            oldWalker.PhoneNumber = newWalker.PhoneNumber ?? oldWalker.PhoneNumber;
+            oldWalker.Photo = newWalker.Photo ?? oldWalker.Photo;
+            oldWalker.SocketId = newWalker.SocketId ?? oldWalker.SocketId;
 
             return oldWalker;
         }

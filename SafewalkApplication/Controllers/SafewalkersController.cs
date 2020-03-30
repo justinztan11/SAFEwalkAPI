@@ -22,8 +22,8 @@ namespace SafewalkApplication.Controllers
         // GET: api/Safewalkers/{email}
         // Authorization: User, Safewalker
         // Unauthorized Fields: Id, Password, Token
-        [HttpGet("{email}")]
-        public async Task<ActionResult<Safewalker>> GetSafewalker([FromHeader] string token, [FromRoute] string email, [FromHeader] bool isUser)
+        [HttpGet("{walkerEmail}")]
+        public async Task<ActionResult<Safewalker>> GetSafewalker([FromHeader] string token, [FromHeader] string email, [FromRoute] string walkerEmail, [FromHeader] bool isUser)
         {
             // if user and not authenticated
             if (isUser && !await _userRepository.Authenticated(token, email))
@@ -36,9 +36,9 @@ namespace SafewalkApplication.Controllers
                 return Unauthorized();
             }
 
-            var walker = await _safewalkerRepository.Get(email);
-            walker.WithoutPrivateInfo();
-            return Ok(walker);
+            var walker = await _safewalkerRepository.Get(walkerEmail);
+            var copyWalker = walker.DeepClone().WithoutPrivateInfo();
+            return Ok(copyWalker);
         }
 
         // PUT: api/Safewalkers/{email}

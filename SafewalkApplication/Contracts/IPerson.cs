@@ -10,5 +10,6 @@
         public string PhoneNumber { get; set; }
         public string Photo { get; set; }
         public string Token { get; set; }
+        public string SocketId { get; set; }
     }
 }

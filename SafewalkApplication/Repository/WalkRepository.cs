@@ -2,6 +2,7 @@
 using SafewalkApplication.Contracts;
 using SafewalkApplication.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SafewalkApplication.Repository
@@ -29,13 +30,22 @@ namespace SafewalkApplication.Repository
 
         public IEnumerable<Walk> GetAll()
         {
-            return _context.Walk;
+            return _context.Walk.Where(m => m.Status == 0);
         }
 
-        public async Task<Walk> Update(string id, Walk walk)
+        public async Task<Walk> Update(Walk walk)
         {
             _context.Walk.Update(walk);
             await _context.SaveChangesAsync();
+            return walk;
+        }
+
+        public async Task<Walk> Delete(string id)
+        {
+            var walk = await _context.Walk.SingleOrDefaultAsync(m => m.Id == id);
+            _context.Walk.Remove(walk);
+            await _context.SaveChangesAsync();
+
             return walk;
         }
 

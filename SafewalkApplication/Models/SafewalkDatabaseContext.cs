@@ -55,6 +55,10 @@ namespace SafewalkApplication.Models
                 entity.Property(e => e.Token)
                     .HasMaxLength(255)
                     .IsUnicode(false);
+
+                entity.Property(e => e.SocketId)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -94,6 +98,10 @@ namespace SafewalkApplication.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Token)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SocketId)
                     .HasMaxLength(255)
                     .IsUnicode(false);
             });
