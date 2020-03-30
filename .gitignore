@@ -3,3 +3,4 @@ SafewalkApplication/bin/*
 SafewalkApplication/obj/*
 SafewalkApplication.Tests/bin/*
 SafewalkApplication.Tests/obj/*
+SafewalkApplication/obj/Debug/*
