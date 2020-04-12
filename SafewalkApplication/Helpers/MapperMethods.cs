@@ -4,10 +4,19 @@ namespace SafewalkApplication.Helpers
 {
     public static class MapperMethods
     {
-        public static Walk MapFields(this Walk oldWalk, Walk newWalk)
+        public static Walk UserMapFields(this Walk oldWalk, Walk newWalk)
         {
             oldWalk.Status = newWalk.Status ?? oldWalk.Status;
-            
+            oldWalk.UserSocketId = newWalk.UserSocketId ?? oldWalk.UserSocketId;
+
+            return oldWalk;
+        }
+
+        public static Walk WalkerMapFields(this Walk oldWalk, Walk newWalk)
+        {
+            oldWalk.Status = newWalk.Status ?? oldWalk.Status;
+            oldWalk.WalkerSocketId = newWalk.WalkerSocketId ?? oldWalk.WalkerSocketId;
+
             return oldWalk;
         }
 
@@ -20,7 +29,6 @@ namespace SafewalkApplication.Helpers
             oldUser.Photo = newUser.Photo ?? oldUser.Photo;
             oldUser.HomeAddress = newUser.HomeAddress ?? oldUser.HomeAddress;
             oldUser.Interest = newUser.Interest ?? oldUser.Interest;
-            oldUser.SocketId = newUser.SocketId ?? oldUser.SocketId;
 
             return oldUser;
         }
@@ -32,7 +40,6 @@ namespace SafewalkApplication.Helpers
             oldWalker.Password = newWalker.Password ?? oldWalker.Password;
             oldWalker.PhoneNumber = newWalker.PhoneNumber ?? oldWalker.PhoneNumber;
             oldWalker.Photo = newWalker.Photo ?? oldWalker.Photo;
-            oldWalker.SocketId = newWalker.SocketId ?? oldWalker.SocketId;
 
             return oldWalker;
         }

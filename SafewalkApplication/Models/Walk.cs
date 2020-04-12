@@ -20,5 +20,7 @@ namespace SafewalkApplication.Models
         public decimal? WalkerCurrLat { get; set; }
         public decimal? WalkerCurrLng { get; set; }
         public int? Status { get; set; }
+        public string UserSocketId { get; set; }
+        public string WalkerSocketId { get; set; }
     }
 }

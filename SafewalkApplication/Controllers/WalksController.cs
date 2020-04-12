@@ -109,10 +109,6 @@ namespace SafewalkApplication.Controllers
             {
                 return Unauthorized();
             }
-            else if (!isUser && walk.WalkerEmail != email)
-            {
-                return Unauthorized();
-            }
 
             return Ok(status);
         }
@@ -193,11 +189,15 @@ namespace SafewalkApplication.Controllers
             }
 
             // map fields from input walk to existing walk
-            oldWalk.MapFields(walk);
-            if (!isUser)
+            if (isUser)
+            {
+                oldWalk.UserMapFields(walk);
+            } 
+            else
             {
                 oldWalk.WalkerEmail = email;
-            } 
+                oldWalk.WalkerMapFields(walk);
+            }
 
             var newWalk = await _walkRepository.Update(oldWalk);
             return Ok(newWalk);
@@ -224,8 +224,8 @@ namespace SafewalkApplication.Controllers
             walk.Id = guid.ToString();
             walk.Status = 0;
             walk.UserEmail = email;
-            walk.WithoutWalkerInfo();
             await _walkRepository.Add(walk);
+            walk.WithoutWalkerInfo();
             return Ok(walk);
         }
 
