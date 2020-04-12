@@ -454,3 +454,5 @@ C:\Users\yoon1\OneDrive\Code Files\CS506\SAFEwalkAPI\SafewalkApplication.Tests\o
 C:\Users\yoon1\OneDrive\Code Files\CS506\SAFEwalkAPI\SafewalkApplication.Tests\obj\Debug\netcoreapp3.1\SafewalkApplication.Tests.csproj.CopyComplete
 C:\Users\yoon1\OneDrive\Code Files\CS506\SAFEwalkAPI\SafewalkApplication.Tests\obj\Debug\netcoreapp3.1\SafewalkApplication.Tests.dll
 C:\Users\yoon1\OneDrive\Code Files\CS506\SAFEwalkAPI\SafewalkApplication.Tests\obj\Debug\netcoreapp3.1\SafewalkApplication.Tests.pdb
+C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication.Tests\obj\Debug\netcoreapp3.1\SafewalkApplication.Tests.csproj.CoreCompileInputs.cache
+C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication.Tests\obj\Debug\netcoreapp3.1\SafewalkApplication.Tests.genruntimeconfig.cache

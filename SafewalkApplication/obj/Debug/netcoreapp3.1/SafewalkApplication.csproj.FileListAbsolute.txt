@@ -298,3 +298,5 @@ C:\Users\yoon1\OneDrive\Code Files\CS506\SAFEwalkAPI\SafewalkApplication\obj\Deb
 C:\Users\yoon1\OneDrive\Code Files\CS506\SAFEwalkAPI\SafewalkApplication\obj\Debug\netcoreapp3.1\SafewalkApplication.dll
 C:\Users\yoon1\OneDrive\Code Files\CS506\SAFEwalkAPI\SafewalkApplication\obj\Debug\netcoreapp3.1\SafewalkApplication.pdb
 C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\obj\Debug\netcoreapp3.1\SafewalkApplication.csprojAssemblyReference.cache
+C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\obj\Debug\netcoreapp3.1\SafewalkApplication.csproj.CoreCompileInputs.cache
+C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\obj\Debug\netcoreapp3.1\SafewalkApplication.genruntimeconfig.cache

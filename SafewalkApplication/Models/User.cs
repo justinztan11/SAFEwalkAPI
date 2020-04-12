@@ -21,6 +21,5 @@ namespace SafewalkApplication.Models
         public string HomeAddress { get; set; }
         public string Interest { get; set; }
         public string Token { get; set; }
-        public string SocketId { get; set; }
     }
 }

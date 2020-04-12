@@ -29,13 +29,13 @@ namespace SafewalkApplication.Helpers
             walk.WalkerEmail = null;
             walk.WalkerCurrLat = null;
             walk.WalkerCurrLng = null;
+            walk.WalkerSocketId = null;
 
             return walk;
         }
 
         public static User WithoutTempAuth(this User user)
         {
-            user.SocketId = null;
             user.Token = null;
 
             return user;
@@ -43,7 +43,6 @@ namespace SafewalkApplication.Helpers
 
         public static Safewalker WithoutTempAuth(this Safewalker walker)
         {
-            walker.SocketId = null;
             walker.Token = null;
 
             return walker;
