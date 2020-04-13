@@ -25,7 +25,6 @@ namespace SafewalkApplication.Controllers
             string token;
             if (isUser)
             {
-
                 token = await _loginRepository.GetUser(email, password);
             }
             else

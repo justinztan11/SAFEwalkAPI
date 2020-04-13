@@ -113,50 +113,6 @@ namespace SafewalkApplication.Controllers
             return Ok(status);
         }
 
-        // GET: api/Walks/{id}/location
-        // Authorization: User, Safewalker
-        [HttpGet("{id}/location")]
-        public async Task<ActionResult<Walk>> GetWalkerLocation([FromHeader] string token, [FromHeader] string email,
-            [FromRoute] string id, [FromHeader] bool isUser)
-        {
-            // if user and not authenticated
-            if (isUser && !await _walkerRepository.Authenticated(token, email))
-            {
-                return Unauthorized();
-            }
-            // is safewalker and not authenticated
-            else if (!isUser && !await _safewalkerRepository.Authenticated(token, email))
-            {
-                return Unauthorized();
-            }
-
-            var walk = await _walkRepository.Get(id);
-            if (walk == null)
-            {
-                return NotFound();
-            }
-
-            var currLat = walk.WalkerCurrLat;
-            var currLng = walk.WalkerCurrLng;
-            if (currLat == null || currLng == null)
-            {
-                return NotFound();
-            }
-
-            // Check if person is part of the walk
-            if (isUser && walk.UserEmail != email)
-            {
-                return Unauthorized();
-            }
-            else if (!isUser && walk.WalkerEmail != email)
-            {
-                return Unauthorized();
-            }
-
-            var walkerLocation = new { lat = currLat, lng = currLng };
-            return Ok(walkerLocation);
-        }
-
         // PUT: api/Walks/{id}
         // Authorization: User, Safewalker
         // User Field Access: Status

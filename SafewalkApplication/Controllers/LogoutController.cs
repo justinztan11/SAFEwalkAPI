@@ -40,22 +40,12 @@ namespace SafewalkApplication.Controllers
             if (isUser)
             {
                 var user = await _userRepository.Get(email);
-                if (user == null)
-                {
-                    return NotFound();
-                }
-
                 user.WithoutTempAuth();
                 await _userRepository.Update(user);   
             }
             else
             {
                 var walker = await _safewalkerRepository.Get(email);
-                if (walker == null)
-                {
-                    return NotFound();
-                }
-
                 walker.WithoutTempAuth();
                 await _safewalkerRepository.Update(walker);
             }

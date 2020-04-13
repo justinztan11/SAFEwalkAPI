@@ -66,7 +66,8 @@ namespace SafewalkApplication
             services.AddControllers();
 
             // for testing, plug in connection verbatim 
-            services.AddDbContext<Models.SafewalkDatabaseContext>(options => options.UseSqlServer(appSettings.Connection));
+            services.AddDbContext<Models.SafewalkDatabaseContext>(options => options.UseSqlServer("Server=tcp:safewalkdb.database.windows.net,1433;Initial Catalog=SafewalkDatabase;Persist Security Info=False;User ID=jztan2;Password=Safewalk11;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
+            //services.AddDbContext<Models.SafewalkDatabaseContext>(options => options.UseSqlServer(appSettings.Connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
