@@ -103,6 +103,9 @@ namespace SafewalkApplication.Repository
         {
             var cachedUser = _cache.Get<User>(email);
 
+            // Cached user is commented out for testing purposes
+            //User cachedUser = null;
+
             if (cachedUser != null)
             {
                 return cachedUser.Token == token && cachedUser.Email == email;
