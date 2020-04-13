@@ -300,3 +300,4 @@ C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\obj\Debug\ne
 C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\obj\Debug\netcoreapp3.1\SafewalkApplication.dll
 C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\obj\Debug\netcoreapp3.1\SafewalkApplication.pdb
 C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\obj\Debug\netcoreapp3.1\SafewalkApplication.genruntimeconfig.cache
+C:\Users\justi\source\repos\SafewalkApplication\SafewalkApplication\obj\Debug\netcoreapp3.1\SafewalkApplication.csprojAssemblyReference.cache
