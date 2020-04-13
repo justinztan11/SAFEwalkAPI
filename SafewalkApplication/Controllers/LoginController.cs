@@ -12,10 +12,12 @@ namespace SafewalkApplication.Controllers
     {
         private readonly ILoginRepository _loginRepository;
         private readonly IUserRepository _userRepository;
-        public LoginController(ILoginRepository loginRepository, IUserRepository userRepository)
+        private readonly ISafewalkerRepository _safewalkerRepository;
+        public LoginController(ILoginRepository loginRepository, IUserRepository userRepository, ISafewalkerRepository safewalkerRepository)
         {
             _loginRepository = loginRepository;
             _userRepository = userRepository;
+            _safewalkerRepository = safewalkerRepository;
         }
 
         // GET: api/Login
@@ -42,26 +44,38 @@ namespace SafewalkApplication.Controllers
 
         // GET: api/Login/{email}
         [HttpGet("{email}")]
-        public async Task<IActionResult> VerifyUser([FromRoute] string email, [FromHeader] string? password)
+        public async Task<IActionResult> VerifyEmail([FromRoute] string email)
         {
-            if (password == null)
+            if (await _userRepository.Exists(email))
             {
-                if (await _userRepository.Exists(email))
+                return Conflict();
+            }
+            return Ok();
+        }
+
+
+        // GET: api/Login/{email}/PasswordVerify
+        [HttpGet("{email}/PasswordVerify")]
+        public async Task<IActionResult> VerifyPassword([FromRoute] string email, [FromHeader] string password, [FromHeader] bool isUser)
+        {
+            if (isUser) 
+            {
+                var user = await _userRepository.Get(email);
+                if (user == null || user.Password != password)
                 {
-                    return Conflict();
+                    return Unauthorized();
                 }
                 return Ok();
             }
             else
             {
-                var user = await _userRepository.Get(email);
-                if (user == null || user.Password != password)
+                var safewalker = await _safewalkerRepository.Get(email);
+                if (safewalker == null || safewalker.Password != password)
                 {
-                    return Conflict();
+                    return Unauthorized();
                 }
                 return Ok();
             }
-
         }
     }
 }
