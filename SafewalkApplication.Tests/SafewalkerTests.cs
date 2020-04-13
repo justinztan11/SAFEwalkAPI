@@ -37,16 +37,17 @@ namespace SafewalkApplication.Tests
         // GetSafewalker Tests ----------------------------------------------------------------------
 
         [TestMethod]
-        [DataRow(SafeWalker11Token, SafeWalker11Email, "false")]
-        [DataRow(SafeWalker12Token, SafeWalker12Email, "false")]
-        [DataRow(SafeWalker13Token, SafeWalker13Email, "false")]
-        public void GetSafewalker_Ok(string token, string email, string isUser)
+        [DataRow(SafeWalker11Token, SafeWalker11Email, SafeWalker11Email, "false")]
+        [DataRow(SafeWalker12Token, SafeWalker12Email, SafeWalker12Email, "false")]
+        [DataRow(SafeWalker13Token, SafeWalker13Email, SafeWalker13Email, "false")]
+        public void GetSafewalker_Ok(string token, string walkerEmail, string email, string isUser)
         {
             //Arrange
-            var request = new HttpRequestMessage(new HttpMethod("GET"), $"/api/Safewalkers/{email}");
+            var request = new HttpRequestMessage(new HttpMethod("GET"), $"/api/Safewalkers/{walkerEmail}");
 
             request.Headers.Add("token", token);
             request.Headers.Add("isUser", isUser);
+            request.Headers.Add("email", email);
             //Act
             var response = _client.SendAsync(request).Result;
 
