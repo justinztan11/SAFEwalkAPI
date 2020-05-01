@@ -101,10 +101,10 @@ namespace SafewalkApplication.Repository
 
         public async Task<bool> Authenticated(string token, string email)
         {
-            var cachedUser = _cache.Get<User>(email);
+            //var cachedUser = _cache.Get<User>(email);
 
             // Cached user is commented out for testing purposes
-            //User cachedUser = null;
+            User cachedUser = null;
 
             if (cachedUser != null)
             {

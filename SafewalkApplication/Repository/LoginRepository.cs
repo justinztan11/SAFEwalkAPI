@@ -39,8 +39,8 @@ namespace SafewalkApplication.Repository
 
             var tokenHandler = new JwtSecurityTokenHandler();
             // Use secret verbatim when testing 
-            //var key = Encoding.ASCII.GetBytes("owbpiwnbowhviervhpoweinvrbpi7459neoriug98908t345ijf803304");
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var key = Encoding.ASCII.GetBytes("owbpiwnbowhviervhpoweinvrbpi7459neoriug98908t345ijf803304");
+            //var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
@@ -76,8 +76,8 @@ namespace SafewalkApplication.Repository
 
             var tokenHandler = new JwtSecurityTokenHandler();
             // Use secret verbatim when testing 
-            //var key = Encoding.ASCII.GetBytes("owbpiwnbowhviervhpoweinvrbpi7459neoriug98908t345ijf803304");
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var key = Encoding.ASCII.GetBytes("owbpiwnbowhviervhpoweinvrbpi7459neoriug98908t345ijf803304");
+            //var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
