@@ -19,3 +19,6 @@ Safewalkers can:
 - View walk requests ordered by time
 - Accept/Deny/Cancel walk request
 - Update Profile
+
+## Screens
+![SAFEwalk App Flow](https://github.com/mujahidfa/SAFEwalk-mobile/blob/master/flowpic.JPG)
