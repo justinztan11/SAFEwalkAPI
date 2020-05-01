@@ -21,4 +21,4 @@ Safewalkers can:
 - Update Profile
 
 ## Screens
-![SAFEwalk App Flow](https://github.com/mujahidfa/SAFEwalk-mobile/blob/master/flowpic.JPG)
+![SAFEwalk App Flow](https://github.com/justinztan11/SAFEwalkAPI/blob/master/flowpic.JPG)
