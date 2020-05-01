@@ -2,7 +2,7 @@
 
 A mobile app for the University of Wisconsin's SAFEwalk service on campus.
 
-Required repos: 
+Required Repos: 
 <br>UI - https://github.com/mujahidfa/SAFEwalk-mobile
 <br>APIs - https://github.com/justinztan11/SAFEwalkAPI
 <br>Socket Server - https://github.com/justinztan11/SAFEwalk-backend
